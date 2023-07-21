@@ -1,0 +1,137 @@
+table {
+    margin-top: 1px;
+    width: 90%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    justify-content: center;
+  }
+  .table-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+  tr, th, td{
+    padding: 2px;
+ }
+
+  @media (max-width: 768px) {
+    table {
+      width: 100%;
+      }
+    
+    table td,
+    table th {
+      display: block;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    table td {
+      text-align: right;
+      padding: 10px;
+    }
+    
+    table td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      display: inline-block;
+      width: 100px;
+      padding-right: 10px;
+    }
+  }
+
+ table tbody tr th{
+    background-color: #1B8C42;
+    font-size: 17px;
+ }
+ table tbody tr td{
+    background-color: #CEF2E1;
+    font-size: 17px;
+ }
+ table tbody tr .primeraColumna{
+    border-top-left-radius: 10px;
+}
+table tbody tr .primeraColumnaT{
+    border-top-right-radius: 10px;
+}
+table tbody tr .ultimaColumnaTD{
+    border-bottom-right-radius:   10px;
+}
+table tbody tr .ultimaColumna{
+    border-bottom-left-radius:   10px;
+}
+ table tbody th,table tbody td{
+    
+    font-weight: normal;
+    font-size: 15px;
+ }
+ table tbody tr th a{
+    font-size: 28px;
+    text-decoration: none;
+    color: #176626;
+    padding: 0;
+ }
+ .modal{
+    position: fixed;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background-color: #111111bd;
+    display: flex;
+    opacity: 1;
+
+}
+.modal-container{
+    margin: auto;
+    width: 90%;
+    max-width: 600px;
+    max-height:90%;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 3em 2.5em;
+    display: grid;
+    gap: 1em;
+    place-items: center;
+    grid-auto-columns: 100%;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-primary {
+    background-color: #17d687;
+}
+
+.btn-primary:hover {
+    background-color: #116118;
+}
+
+.btn-success {
+    background-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+.modal_close{
+    text-decoration: none;
+}
