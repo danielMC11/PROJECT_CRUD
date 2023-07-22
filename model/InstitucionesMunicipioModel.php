@@ -279,7 +279,7 @@ class InstitucionesMunicipioModel
         order by nomb_inst");
         return ($statement->execute()) ? $statement->fetchAll() : false;
         }
-        public function departamentos() {
+        public function departamentos_por_instituciones() {
             $statement = $this->PDO->prepare("SELECT i.codigo_ies_padre , d.cod_depto, nomb_depto FROM departamento d inner join 
             municipio m on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic inner join 
             instituciones ins on i.codigo_ies_padre=ins.codigo_ies_padre  group by i.codigo_ies_padre, d.cod_depto, nomb_depto

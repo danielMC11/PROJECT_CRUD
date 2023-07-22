@@ -19,7 +19,7 @@ require_once "/proyecto_crud/controller/InstitucionesMunicipioController.php";
 $obj = new InstitucionesMunicipioController();
 
 $rows_inst = $obj->instituciones();
-$rows_dep = $obj->departamentos();
+$rows_dep = $obj->departamentos_por_instituciones();
 $rows_mun = $obj->municipios();
 
 

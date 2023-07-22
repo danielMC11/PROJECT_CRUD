@@ -4,7 +4,7 @@
       
         public function __construct()
         {
-            require_once "/opt/lampp/htdocs/proyecto_crud/model/InstitucionesMunicipioModel.php";
+            require_once "/proyecto_crud/model/InstitucionesMunicipioModel.php";
             $this->model= new InstitucionesMunicipioModel();
         }
         public function index(){
@@ -78,8 +78,8 @@
         public function instituciones(){
             return ($this->model->instituciones()) ? $this->model->instituciones(): false;
             }
-            public function departamentos(){
-            return ($this->model->departamentos()) ? $this->model->departamentos(): false;
+            public function departamentos_por_instituciones(){
+            return ($this->model->departamentos_por_instituciones()) ? $this->model->departamentos_por_instituciones(): false;
             }
 
             public function departamentos_2(){
