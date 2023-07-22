@@ -306,8 +306,10 @@ class InstitucionesMunicipioModel
         $statement = $this->PDO->prepare("SELECT nomb_munic, programas_vigente from municipio m inner join
         departamento d on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic
         inner join
-        instituciones ins on ins.codigo_ies_padre=i.codigo_ies_padre where i.codigo_ies_padre=:cod_inst and
-        d.cod_depto=:cod_depto");
+        instituciones ins on ins.codigo_ies_padre=i.codigo_ies_padre 
+        where i.codigo_ies_padre=:cod_inst and
+        d.cod_depto=:cod_depto and
+        programas_vigente IS NOT NULL");
         $statement->bindParam(":cod_inst", $cod_inst);
         $statement->bindParam(":cod_depto", $cod_depto);
         return ($statement->execute()) ? $statement->fetchAll() : false;
@@ -318,7 +320,10 @@ class InstitucionesMunicipioModel
         from municipio m inner join departamento d on m.cod_depto=d.cod_depto inner join inst_por_municipio i on
         i.cod_munic=m.cod_munic
         inner join instituciones ins on ins.codigo_ies_padre=i.codigo_ies_padre
-        where i.codigo_ies_padre=:cod_inst and d.cod_depto=:cod_depto and m.cod_munic=:cod_munic");
+        where i.codigo_ies_padre=:cod_inst and 
+        d.cod_depto=:cod_depto and 
+        m.cod_munic=:cod_munic and
+        programas_vigente IS NOT NULL");
         $statement->bindParam(":cod_inst", $cod_inst);
         $statement->bindParam(":cod_depto", $cod_depto);
         $statement->bindParam(":cod_munic", $cod_munic);
@@ -338,7 +343,7 @@ class InstitucionesMunicipioModel
         return ($statement->execute()) ? $statement->fetch() : false;
         }
         
-        public function stats_d($cod_depto) {
+        public function stats_departamentos($cod_depto) {
         $statement = $this->PDO->prepare("SELECT nomb_depto, nomb_munic, count(*) as cantidad from
         departamento
         join municipio on departamento.cod_depto=municipio.cod_depto

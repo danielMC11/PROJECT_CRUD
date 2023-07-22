@@ -96,8 +96,8 @@
             public function nombre_and_total($cod_inst,$cod_depto){
             return ($this->model->nombre_and_total($cod_inst,$cod_depto)) ? $this->model->nombre_and_total($cod_inst,$cod_depto): false;
             }
-            public function stats_d($cod_depto){
-            return ($this->model->stats_d($cod_depto)) ? $this->model->stats_d($cod_depto): false;
+            public function stats_departamentos($cod_depto){
+            return ($this->model->stats_departamentos($cod_depto)) ? $this->model->stats_departamentos($cod_depto): false;
             }
             public function stats_departamento_nombre_y_total($cod_depto){
             return ($this->model->stats_departamento_nombre_y_total($cod_depto)) ? $this->model->stats_departamento_nombre_y_total($cod_depto): false;

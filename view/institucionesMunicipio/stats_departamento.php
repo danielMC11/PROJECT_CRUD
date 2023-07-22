@@ -24,7 +24,7 @@ $rows_dep = $obj->departamentos();
 
 if(isset($_GET['cod_depto'])) {
 
-$rows = $obj->stats_d($_GET['cod_depto']);
+$rows = $obj->stats_departamentos($_GET['cod_depto']);
 $row = $obj->stats_departamento_nombre_y_total($_GET['cod_depto']);
 $nomb_depto = $row['nomb_depto'];
 $total = $row['total'];
