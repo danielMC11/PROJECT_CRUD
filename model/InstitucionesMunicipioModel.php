@@ -274,34 +274,34 @@ class InstitucionesMunicipioModel
             }
     }
 
-        public function instituciones() {
+    public function instituciones() {
         $statement = $this->PDO->prepare("SELECT codigo_ies_padre , nomb_inst FROM instituciones
         order by nomb_inst");
         return ($statement->execute()) ? $statement->fetchAll() : false;
-        }
+    }
 
-        public function departamentos() {
-            $statement = $this->PDO->prepare("SELECT cod_depto, nomb_depto from departamento order by nomb_depto");
-            return ($statement->execute()) ? $statement->fetchAll() : false;
-        }
+    public function departamentos() {
+        $statement = $this->PDO->prepare("SELECT cod_depto, nomb_depto from departamento order by nomb_depto");
+        return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
 
-        public function departamentos_por_instituciones() {
-            $statement = $this->PDO->prepare("SELECT i.codigo_ies_padre , d.cod_depto, nomb_depto FROM departamento d inner join 
-            municipio m on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic inner join 
-            instituciones ins on i.codigo_ies_padre=ins.codigo_ies_padre  group by i.codigo_ies_padre, d.cod_depto, nomb_depto
+    public function departamentos_por_instituciones() {
+        $statement = $this->PDO->prepare("SELECT i.codigo_ies_padre , d.cod_depto, nomb_depto FROM departamento d inner join 
+        municipio m on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic inner join 
+        instituciones ins on i.codigo_ies_padre=ins.codigo_ies_padre  group by i.codigo_ies_padre, d.cod_depto, nomb_depto
         ");
         return ($statement->execute()) ? $statement->fetchAll() : false;
-        }
+    }
 
-        public function municipios_de_departamentos_por_instituciones() {
+    public function municipios_de_departamentos_por_instituciones() {
         $statement = $this->PDO->prepare("SELECT i.codigo_ies_padre as cod_ies, d.cod_depto, m.cod_munic, nomb_munic FROM departamento d inner join 
         municipio m on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic inner join 
         instituciones ins on i.codigo_ies_padre=ins.codigo_ies_padre order by cod_inst
         ");
         return ($statement->execute()) ? $statement->fetchAll() : false;
-        }
+    }
         
-        public function stats_programas($cod_inst,$cod_depto,$cod_munic){
+    public function stats_programas($cod_inst,$cod_depto,$cod_munic){
         if($cod_munic==null){
         $statement = $this->PDO->prepare("SELECT nomb_munic, programas_vigente from municipio m inner join
         departamento d on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic
@@ -329,8 +329,9 @@ class InstitucionesMunicipioModel
         $statement->bindParam(":cod_munic", $cod_munic);
         return ($statement->execute()) ? $statement->fetch() : false;
         }
-        }
-        public function stats_programas_nombre_inst_dept($cod_inst,$cod_depto){
+    }
+
+    public function stats_programas_nombre_inst_dept($cod_inst,$cod_depto){
         $statement = $this->PDO->prepare("SELECT concat(nomb_inst, ' / ',nomb_depto) as nombre_inst_dept 
         from municipio m inner join
         departamento d on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic
@@ -340,9 +341,9 @@ class InstitucionesMunicipioModel
         $statement->bindParam(":cod_inst", $cod_inst);
         $statement->bindParam(":cod_depto", $cod_depto);
         return ($statement->execute()) ? $statement->fetch() : false;
-        }
+    }
         
-        public function stats_departamentos($cod_depto) {
+    public function stats_departamentos($cod_depto) {
         $statement = $this->PDO->prepare("SELECT nomb_depto, nomb_munic, count(*) as cantidad from
         departamento
         join municipio on departamento.cod_depto=municipio.cod_depto
@@ -350,8 +351,9 @@ class InstitucionesMunicipioModel
         departamento.cod_depto=:cod_depto group by nomb_depto, nomb_munic");
         $statement->bindParam(":cod_depto", $cod_depto);
         return ($statement->execute()) ? $statement->fetchAll() : false;
-        }
-        public function stats_departamento_nombre_y_total($cod_depto) {
+    }
+
+    public function stats_departamento_nombre_y_total($cod_depto) {
         $statement = $this->PDO->prepare("SELECT nomb_depto, sum(cantidad) as total from 
         (SELECT nomb_depto, nomb_munic, count(*) as cantidad from
         departamento d
@@ -361,20 +363,20 @@ class InstitucionesMunicipioModel
         group by nomb_depto, nomb_munic order by nomb_depto) as subconsulta group by nomb_depto");
         $statement->bindParam(":cod_depto", $cod_depto);
         return ($statement->execute()) ? $statement->fetch() : false;
-        }
-        
-        public function stats_normas() {
+    }
+
+    public function stats_normas() {
         $statement = $this->PDO->prepare("SELECT nomb_norma, count(codigo_ies_padre) as cantidad from inst_por_municipio i
         inner join norma_creacion n on n.cod_norma=i.cod_norma group by nomb_norma,i.cod_norma
         ");
         return ($statement->execute()) ? $statement->fetchAll() : false;
-        }
+    }
 
-        public function logs_instituciones() {
+    public function logs_instituciones() {
             $statement = $this->PDO->prepare("SELECT i.codigo_ies_padre, cod_inst, nomb_inst, telefono, operacion, changed_on, user_id from inst_auditoria_in 
             i inner join inst_municipio_auditoria_in ins on i.codigo_ies_padre=ins.codigo_ies_padre");
             return ($statement->execute()) ? $statement->fetchAll() : false;
-            }
+    }
 
 
     
