@@ -287,7 +287,7 @@ class InstitucionesMunicipioModel
         return ($statement->execute()) ? $statement->fetchAll() : false;
         }
 
-        public function departamentos_2() {
+        public function departamentos() {
         $statement = $this->PDO->prepare("SELECT cod_depto, nomb_depto from departamento order by nomb_depto");
         return ($statement->execute()) ? $statement->fetchAll() : false;
         }

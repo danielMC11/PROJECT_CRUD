@@ -82,8 +82,8 @@
             return ($this->model->departamentos_por_instituciones()) ? $this->model->departamentos_por_instituciones(): false;
             }
 
-            public function departamentos_2(){
-                return ($this->model->departamentos_2()) ? $this->model->departamentos_2() : false;
+            public function departamentos(){
+                return ($this->model->departamentos()) ? $this->model->departamentos() : false;
             }
 
             public function municipios_de_departamentos_por_instituciones(){

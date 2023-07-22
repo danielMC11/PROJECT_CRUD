@@ -20,7 +20,7 @@ require_once "/proyecto_crud/controller/InstitucionesMunicipioController.php";
 
 $obj = new InstitucionesMunicipioController();
 
-$rows_dep = $obj->departamentos_2();
+$rows_dep = $obj->departamentos();
 
 if(isset($_GET['cod_depto'])) {
 
