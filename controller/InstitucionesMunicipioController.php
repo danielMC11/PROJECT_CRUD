@@ -89,22 +89,18 @@
             public function municipios_de_departamentos_por_instituciones(){
             return ($this->model->municipios_de_departamentos_por_instituciones()) ? $this->model->municipios_de_departamentos_por_instituciones(): false;
             }
-            public function stats_p($cod_inst,$cod_depto,$cod_munic){
-            return ($this->model->stats_p($cod_inst,$cod_depto,$cod_munic)) ? $this->model->stats_p($cod_inst,$cod_depto,$cod_munic): false;
+            public function stats_programas($cod_inst,$cod_depto,$cod_munic){
+            return ($this->model->stats_programas($cod_inst,$cod_depto,$cod_munic)) ? $this->model->stats_programas($cod_inst,$cod_depto,$cod_munic): false;
             }
             
-            public function nombre_and_total($cod_inst,$cod_depto){
-            return ($this->model->nombre_and_total($cod_inst,$cod_depto)) ? $this->model->nombre_and_total($cod_inst,$cod_depto): false;
+            public function stats_programas_nombre_inst_dept($cod_inst,$cod_depto){
+            return ($this->model->stats_programas_nombre_inst_dept($cod_inst,$cod_depto)) ? $this->model->stats_programas_nombre_inst_dept($cod_inst,$cod_depto): false;
             }
             public function stats_departamentos($cod_depto){
             return ($this->model->stats_departamentos($cod_depto)) ? $this->model->stats_departamentos($cod_depto): false;
             }
             public function stats_departamento_nombre_y_total($cod_depto){
             return ($this->model->stats_departamento_nombre_y_total($cod_depto)) ? $this->model->stats_departamento_nombre_y_total($cod_depto): false;
-            }
-
-            public function normas(){
-            return ($this->model->normas()) ? $this->model->normas(): false; 
             }
 
             public function stats_normas(){

@@ -301,7 +301,7 @@ class InstitucionesMunicipioModel
         return ($statement->execute()) ? $statement->fetchAll() : false;
         }
         
-        public function stats_p($cod_inst,$cod_depto,$cod_munic){
+        public function stats_programas($cod_inst,$cod_depto,$cod_munic){
         if($cod_munic==null){
         $statement = $this->PDO->prepare("SELECT nomb_munic, programas_vigente from municipio m inner join
         departamento d on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic
@@ -330,15 +330,14 @@ class InstitucionesMunicipioModel
         return ($statement->execute()) ? $statement->fetch() : false;
         }
         }
-        public function nombre_and_total($cod_inst,$cod_depto){
-        $statement = $this->PDO->prepare("SELECT concat(nomb_inst, ' / ',nomb_depto) as nombre_inst_dept,
-        sum(programas_vigente) as total from municipio m inner join
+        public function stats_programas_nombre_inst_dept($cod_inst,$cod_depto){
+        $statement = $this->PDO->prepare("SELECT concat(nomb_inst, ' / ',nomb_depto) as nombre_inst_dept 
+        from municipio m inner join
         departamento d on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic
         inner join
         instituciones ins on ins.codigo_ies_padre=i.codigo_ies_padre where i.codigo_ies_padre=:cod_inst and
         d.cod_depto=:cod_depto group by nomb_inst, nomb_depto");
         $statement->bindParam(":cod_inst", $cod_inst);
-        
         $statement->bindParam(":cod_depto", $cod_depto);
         return ($statement->execute()) ? $statement->fetch() : false;
         }
@@ -363,12 +362,7 @@ class InstitucionesMunicipioModel
         $statement->bindParam(":cod_depto", $cod_depto);
         return ($statement->execute()) ? $statement->fetch() : false;
         }
-
-        public function normas() {
-        $statement = $this->PDO->prepare("SELECT cod_norma, nomb_norma from norma_creacion");
-        return ($statement->execute()) ? $statement->fetchAll() : false;
-        }
-
+        
         public function stats_normas() {
         $statement = $this->PDO->prepare("SELECT nomb_norma, count(codigo_ies_padre) as cantidad from inst_por_municipio i
         inner join norma_creacion n on n.cod_norma=i.cod_norma group by nomb_norma,i.cod_norma

@@ -24,17 +24,16 @@ $rows_mun = $obj->municipios_de_departamentos_por_instituciones();
 
 
 if($_GET['cod_inst'] != null && $_GET['cod_depto'] != null && $_GET['cod_munic'] != null) {
-$row = $obj->stats_p($_GET['cod_inst'],$_GET['cod_depto'],$_GET['cod_munic']);
+$row = $obj->stats_programas($_GET['cod_inst'],$_GET['cod_depto'],$_GET['cod_munic']);
 $nomb_u_depto = $row['nombre_inst_dept'];
 $munic = array($row['nomb_munic']);
 $programas = array($row['programas_vigente']);
 }elseif($_GET['cod_inst'] != null && $_GET['cod_depto'] != null && $_GET['cod_munic'] == null){
 
-$rows_p = $obj->stats_p($_GET['cod_inst'],$_GET['cod_depto'],$_GET['cod_munic']);
+$rows_p = $obj->stats_programas($_GET['cod_inst'],$_GET['cod_depto'],$_GET['cod_munic']);
 
-$row_nom_sum = $obj->nombre_and_total($_GET['cod_inst'],$_GET['cod_depto']);
-$nomb_u_depto = $row_nom_sum['nombre_inst_dept'];
-
+$row_nom = $obj->stats_programas_nombre_inst_dept($_GET['cod_inst'],$_GET['cod_depto']);
+$nomb_u_depto = $row_nom['nombre_inst_dept'];
 
 foreach($rows_p as $data)
 {
