@@ -20,7 +20,7 @@ $obj = new InstitucionesMunicipioController();
 
 $rows_inst = $obj->instituciones();
 $rows_dep = $obj->departamentos_por_instituciones();
-$rows_mun = $obj->municipios();
+$rows_mun = $obj->municipios_de_departamentos_por_instituciones();
 
 
 if($_GET['cod_inst'] != null && $_GET['cod_depto'] != null && $_GET['cod_munic'] != null) {

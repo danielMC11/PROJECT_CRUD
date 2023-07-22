@@ -86,8 +86,8 @@
                 return ($this->model->departamentos_2()) ? $this->model->departamentos_2() : false;
             }
 
-            public function municipios(){
-            return ($this->model->municipios()) ? $this->model->municipios(): false;
+            public function municipios_de_departamentos_por_instituciones(){
+            return ($this->model->municipios_de_departamentos_por_instituciones()) ? $this->model->municipios_de_departamentos_por_instituciones(): false;
             }
             public function stats_p($cod_inst,$cod_depto,$cod_munic){
             return ($this->model->stats_p($cod_inst,$cod_depto,$cod_munic)) ? $this->model->stats_p($cod_inst,$cod_depto,$cod_munic): false;
