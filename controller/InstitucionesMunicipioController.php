@@ -99,11 +99,8 @@
             public function stats_d($cod_depto){
             return ($this->model->stats_d($cod_depto)) ? $this->model->stats_d($cod_depto): false;
             }
-            public function stats_d_nomb($cod_depto){
-            return ($this->model->stats_d_nomb($cod_depto)) ? $this->model->stats_d_nomb($cod_depto): false;
-            }
-            public function sum_inst($cod_depto){
-            return ($this->model->sum_inst($cod_depto)) ? $this->model->sum_inst($cod_depto): false;
+            public function stats_departamento_nombre_y_total($cod_depto){
+            return ($this->model->stats_departamento_nombre_y_total($cod_depto)) ? $this->model->stats_departamento_nombre_y_total($cod_depto): false;
             }
 
             public function normas(){

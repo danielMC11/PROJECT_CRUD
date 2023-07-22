@@ -25,10 +25,9 @@ $rows_dep = $obj->departamentos();
 if(isset($_GET['cod_depto'])) {
 
 $rows = $obj->stats_d($_GET['cod_depto']);
-$nomb = $obj->stats_d_nomb($_GET['cod_depto']);
-$nomb_depto = $nomb['nomb_depto'];
-$sum = $obj->sum_inst($_GET['cod_depto']);
-$total = $sum['total'];
+$row = $obj->stats_departamento_nombre_y_total($_GET['cod_depto']);
+$nomb_depto = $row['nomb_depto'];
+$total = $row['total'];
 foreach($rows as $data)
 {
 $municipios[] = $data['nomb_munic'];

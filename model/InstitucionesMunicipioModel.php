@@ -347,21 +347,14 @@ class InstitucionesMunicipioModel
         $statement->bindParam(":cod_depto", $cod_depto);
         return ($statement->execute()) ? $statement->fetchAll() : false;
         }
-        public function stats_d_nomb($cod_depto) {
-        $statement = $this->PDO->prepare("SELECT nomb_depto from departamento
-        join municipio on departamento.cod_depto=municipio.cod_depto
-        join inst_por_municipio on inst_por_municipio.cod_munic=municipio.cod_munic where
-        departamento.cod_depto=:cod_depto group by nomb_depto");
-        $statement->bindParam(":cod_depto", $cod_depto);
-        return ($statement->execute()) ? $statement->fetch() : false;
-        }
-        
-        public function sum_inst($cod_depto) {
-        $statement = $this->PDO->prepare("SELECT sum(cantidad) as total from (SELECT nomb_munic, count(*) as
-        cantidad from departamento
-        join municipio on departamento.cod_depto=municipio.cod_depto
-        join inst_por_municipio on inst_por_municipio.cod_munic=municipio.cod_munic where
-        departamento.cod_depto=:cod_depto group by nomb_depto, nomb_munic) as subconsulta");
+        public function stats_departamento_nombre_y_total($cod_depto) {
+        $statement = $this->PDO->prepare("SELECT nomb_depto, sum(cantidad) as total from 
+        (SELECT nomb_depto, nomb_munic, count(*) as cantidad from
+        departamento d
+        join municipio m on d.cod_depto=m.cod_depto
+        join inst_por_municipio ins on ins.cod_munic=m.cod_munic 
+        where d.cod_depto=:cod_depto
+        group by nomb_depto, nomb_munic order by nomb_depto) as subconsulta group by nomb_depto");
         $statement->bindParam(":cod_depto", $cod_depto);
         return ($statement->execute()) ? $statement->fetch() : false;
         }
