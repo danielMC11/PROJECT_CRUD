@@ -19,9 +19,9 @@ $rowsToShow = array_slice($rows, $start, $rowsPerPage);
     <div class="btn">
         <a href="consulta_dir.php" class="btn-consult"><i class="fa fa-filter"></i> FILTRADO</a>
     </div>
-   <!--<div class="btn">
+   <div class="btn">
         <a href="create.php" class="btn-consult"><i class="fa fa-plus-circle"></i> AGREGAR DIRECTIVO</a>
-    </div>--> 
+    </div>
 
 </div>
 <div class="concantenor">

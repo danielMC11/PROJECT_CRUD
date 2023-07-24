@@ -45,7 +45,7 @@ class RectoriaController {
 
     public function logs_rectoria() {
         return ($this->model->logs_rectoria()) ? $this->model->logs_rectoria() : false;
-       }
+    }
 }
 
 ?>
