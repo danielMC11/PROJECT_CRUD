@@ -3,7 +3,7 @@ class RectoriaController {
     private $model;
 
     public function __construct() {
-        require_once "/opt/lampp/htdocs/proyecto_crud/model/RectoriaModel.php";
+        require_once "/proyecto_crud/model/RectoriaModel.php";
         $this->model = new RectoriaModel();
     }
 

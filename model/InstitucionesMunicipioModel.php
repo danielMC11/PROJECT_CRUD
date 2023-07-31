@@ -121,8 +121,7 @@ class InstitucionesMunicipioModel
         JOIN norma_creacion nc ON nc.cod_norma = i.cod_norma
         JOIN sectores sec ON sec.cod_sector = p.cod_sector
         JOIN caracter_academico ca ON ca.cod_academ = p.cod_academ
-        ORDER BY CAST(i.cod_inst AS INTEGER);
-;
+        ORDER BY CAST(i.cod_inst AS INTEGER)
         ");
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }

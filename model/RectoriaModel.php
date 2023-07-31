@@ -87,7 +87,7 @@ class RectoriaModel {
         JOIN cargos c ON c.cod_cargo = r.cod_cargo
         JOIN acto_nombramiento a ON a.cod_nombram = r.cod_nombram
         JOIN municipio m ON m.cod_munic = r.cod_munic
-        ORDER BY r.cod_inst
+        ORDER BY CAST(r.cod_inst as INTEGER)
         ");
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }

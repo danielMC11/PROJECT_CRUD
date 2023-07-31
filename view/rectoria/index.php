@@ -28,6 +28,7 @@ $rowsToShow = array_slice($rows, $start, $rowsPerPage);
     <table class="table" style="flex: 1;">
         <thead>
             <tr>
+                <th scope="col">CODIGO INSTITUCION</th>
                 <th scope="col">DIRECTIVO</th>
                 <th scope="col">INSTITUCION</th>
                 <th scope="col">CARGO</th>
@@ -42,6 +43,7 @@ $rowsToShow = array_slice($rows, $start, $rowsPerPage);
             <?php if ($rowsToShow): ?>
             <?php foreach ($rowsToShow as $row): ?>
             <tr>
+                <th><?= $row['cod_inst'] ?></th>
                 <th><?= $row['nomb_directivo'] ?></th>
                 <th><?= $row['nomb_inst'] ?></th>
                 <th><?= $row['nomb_cargo'] ?></th>
