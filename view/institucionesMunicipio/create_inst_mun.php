@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/assest/css/agregarInst.css">
 <div class="modal">
     <div class="modal-container">
-        <h2>Agregar una Institucion Nueva</h2>
+        <h2>Agregar una Sede Nueva</h2>
         <form action="store_inst_mun.php" method="POST" autocomplete="off">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">IES</label>

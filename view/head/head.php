@@ -16,7 +16,8 @@
             <ul>
                 <li><a href="/index.php">Inicio</a></li>
                 <li><a href="/view/rectoria/index.php">Directivos</a></li>
-                <li><a href="/view/institucionesMunicipio/index_inst_mun.php">Instituciones</a></li>
+                <li><a href="/view/institucionesMunicipio/index_inst.php">Instituciones</a></li>
+                <li><a href="/view/institucionesMunicipio/index_inst_mun.php">Instituciones Municipales</a></li>
                 <li><a href="/view/institucionesMunicipio/stats_menu.php">Estadisticas</a></li>
                 <li><a href="/view/historico/logs.php">Historico Directivos</a></li>
                 <li><a href="/view/historico/logs_inst.php">Historico Instituciones</a></li>

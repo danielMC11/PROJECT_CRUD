@@ -126,6 +126,11 @@ class InstitucionesMunicipioModel
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }
 
+    public function index_inst(){
+        $statement=$this->PDO->prepare("SELECT codigo_ies_padre,nomb_inst,nomb_academ,nomb_sector from 
+        instituciones join caracter_academico using(cod_academ) join sectores using(cod_sector)");
+        return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
     public function reporte($cod_admon){
         $statement = $this->PDO->prepare("SELECT 
         cod_inst,

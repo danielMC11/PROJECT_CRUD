@@ -10,6 +10,9 @@
         public function index(){
             return ($this->model->index()) ? $this->model->index(): false;
         }
+        public function index_inst(){
+            return ($this->model->index_inst()) ? $this->model->index_inst(): false;
+        }
         public function search() {
             $rows = $this->model->search();
             $data = array();
