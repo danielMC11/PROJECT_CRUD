@@ -2,7 +2,7 @@
 <div class="modal">
     <div class="modal-container">
         <h2>Agregar una Institucion Nueva</h2>
-        <form action="store_inst_mun.php" method="POST" autocomplete="off">
+        <form action="store_inst.php" method="POST" autocomplete="off">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">NOMBRE DE INSTITUCION</label>
                 <input type="text" name="nomb_inst" required class="form-control" id="exampleInputEmail1"
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">ACEPTAR</button>
-            <a class="btn btn-danger" href="/view/institucionesMunicipio/index_inst_mun.php">CANCELAR</a>
+            <a class="btn btn-danger" href="/view/institucionesMunicipio/index_inst.php">CANCELAR</a>
         </form>
     </div>
 </div>

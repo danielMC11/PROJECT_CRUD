@@ -78,6 +78,11 @@
             
         }
 
+        public function insertar_inst($nomb_inst, $cod_sector, $cod_academ){
+            $result=$this->model->insertar_inst($nomb_inst, $cod_sector, $cod_academ);
+            return header("Location: index_inst.php");
+        }
+
         public function instituciones(){
             return ($this->model->instituciones()) ? $this->model->instituciones(): false;
             }

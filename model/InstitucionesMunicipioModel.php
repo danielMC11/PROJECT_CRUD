@@ -1,6 +1,6 @@
 <!--Se organizo las consultas -->
 <?php
-require_once "/opt/lampp/htdocs/proyecto_crud/config/db.php";
+require_once "/proyecto_crud/config/db.php";
 
 class InstitucionesMunicipioModel
  {
@@ -41,6 +41,27 @@ class InstitucionesMunicipioModel
             return false;
         }
     }
+
+    public function insertar_inst($nomb_inst, $cod_sector, $cod_academ) {
+        try {
+            $statement = $this->PDO->prepare(
+                "INSERT INTO instituciones (nomb_inst, cod_sector, cod_academ) 
+                VALUES (:nomb_inst, :cod_sector, :cod_academ)"
+            );
+            $statement->bindParam(":nomb_inst", $nomb_inst);
+            $statement->bindParam(":cod_sector", $cod_sector);
+            $statement->bindParam(":cod_academ", $cod_academ);
+
+            return ($statement->execute()); 
+
+        } catch (PDOException $e) {
+            // Manejo de errores de PDO
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+
     public function search(){
         $campo=$this->PDO->real_escape_string($_POST[campo])??null;
         

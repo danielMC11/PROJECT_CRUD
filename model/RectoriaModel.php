@@ -1,6 +1,6 @@
 <!--Se organizo las consultas -->
 <?php
-require_once "/opt/lampp/htdocs/proyecto_crud/config/db.php";
+require_once "/proyecto_crud/config/db.php";
 
 class RectoriaModel {
     private $PDO;
