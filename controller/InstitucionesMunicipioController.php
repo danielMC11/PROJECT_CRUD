@@ -95,6 +95,10 @@
             return ($this->model->departamentos()) ? $this->model->departamentos() : false;
         }
 
+        public function municipios_de_departamentos(){
+            return ($this->model->municipios_de_departamentos()) ? $this->model->municipios_de_departamentos() : false;
+        }
+
         public function municipios_de_departamentos_por_instituciones(){
             return ($this->model->municipios_de_departamentos_por_instituciones()) ? $this->model->municipios_de_departamentos_por_instituciones(): false;
         }

@@ -10,31 +10,19 @@ class InstitucionesMunicipioModel
         $db = new db();
         $this->PDO = $db->conexion();
     }
-    public function insertar($codigo_ies_padre, $nomb_inst, $cod_sector, $cod_academ, $cod_inst, $cod_munic, $telefono, $cod_estado) {
+    public function insertar($codigo_ies_padre, $cod_depto, $cod_munic, $telefono, $cod_estado, $acreditada){
         try {
-            $statement1 = $this->PDO->prepare(
+            $statement = $this->PDO->prepare(
                 "INSERT INTO instituciones (codigo_ies_padre, nomb_inst, cod_sector, cod_academ) 
                 VALUES (:codigo_ies_padre, :nomb_inst, :cod_sector, :cod_academ)"
             );
-            $statement1->bindParam(":codigo_ies_padre", $codigo_ies_padre);
-            $statement1->bindParam(":nomb_inst", $nomb_inst);
-            $statement1->bindParam(":cod_sector", $cod_sector);
-            $statement1->bindParam(":cod_academ", $cod_academ);
-    
-            $statement2 = $this->PDO->prepare(
-                "INSERT INTO inst_por_municipio (codigo_ies_padre, cod_inst, cod_munic, telefono, cod_estado) 
-                VALUES (:codigo_ies_padre, :cod_inst, :cod_munic, :telefono, :cod_estado)"
-            );
-            $statement2->bindParam(":codigo_ies_padre", $codigo_ies_padre);
-            $statement2->bindParam(":cod_inst", $cod_inst);
-            $statement2->bindParam(":cod_munic", $cod_munic);
-            $statement2->bindParam(":telefono", $telefono);
-            $statement2->bindParam(":cod_estado", $cod_estado);
-    
-            $result1 = $statement1->execute();
-            $result2 = $statement2->execute();
-    
-            return ($result1 && $result2);
+            $statement->bindParam(":codigo_ies_padre", $codigo_ies_padre);
+            $statement->bindParam(":nomb_inst", $nomb_inst);
+            $statement->bindParam(":cod_sector", $cod_sector);
+            $statement->bindParam(":cod_academ", $cod_academ);
+            
+            return ($statement->execute()); 
+
         } catch (PDOException $e) {
             // Manejo de errores de PDO
             echo "Error: " . $e->getMessage();
@@ -308,6 +296,11 @@ class InstitucionesMunicipioModel
 
     public function departamentos() {
         $statement = $this->PDO->prepare("SELECT cod_depto, nomb_depto from departamento order by nomb_depto");
+        return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
+
+    public function municipios_de_departamentos() {
+        $statement = $this->PDO->prepare("SELECT cod_depto, cod_munic, nomb_munic from municipio");
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }
 
