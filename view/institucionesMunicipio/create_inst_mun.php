@@ -1,3 +1,11 @@
+<?php
+
+require_once "/proyecto_crud/controller/InstitucionesMunicipioController.php";
+
+$obj = new InstitucionesMunicipioController();
+
+$rows_dep = $obj->departamentos();
+?>
 <link rel="stylesheet" type="text/css" href="/assest/css/agregarInst.css">
 <div class="modal">
     <div class="modal-container">
@@ -43,36 +51,14 @@
                 <label for="exampleInputEmail1" class="form-label">DEPARTAMENTO</label>
                 <div class="custom_select">
                 <select name="cod_depto" required class="form-control" id="cod_depto">
-                    <option value="">Seleccione departamento</option>
-                    <option value="dp1">Casanare</option>
-                    <option value="dp2">Cundinamarca</option>
-                    <option value="dp3">Tolima</option>
-                    <option value="dp4">Meta</option>
-                    <option value="dp5">Antioquia</option>
-                    <option value="dp6">Chocó</option>
-                    <option value="dp7">Boyacá</option>
-                    <option value="dp8">Quindío</option>
-                    <option value="dp9">Santander</option>
-                    <option value="dp10">Caquetá</option>
-                    <option value="dp11">Archipiélago de San Andrés Providencia y Santa Catalina</option>
-                    <option value="dp12">Córdoba</option>
-                    <option value="dp13">Sucre</option>
-                    <option value="dp14">Arauca</option>
-                    <option value="dp15">Nariño</option>
-                    <option value="dp16">Amazonas</option>
-                    <option value="dp17">Bogotá D.C.</option>
-                    <option value="dp18">Magdalena</option>
-                    <option value="dp19">Norte de Santander</option>
-                    <option value="dp20">Risaralda</option>
-                    <option value="dp21">La Guajira</option>
-                    <option value="dp22">Cesar</option>
-                    <option value="dp23">Cauca</option>
-                    <option value="dp24">Putumayo</option>
-                    <option value="dp25">Caldas</option>
-                    <option value="dp26">Huila</option>
-                    <option value="dp27">Valle del Cauca</option>
-                    <option value="dp28">Bolívar</option>
-                    <option value="dp29">Atlántico</option>
+                            <option value=''>Seleccione Departamento</option>
+                            <?php if ($rows_dep): ?>
+                            <?php foreach ($rows_dep as $row_d): ?>
+                            <option value='<?=$row_d['cod_depto']?>'><?= $row_d['nomb_depto'] ?></option>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                            <option>No Hay Registros</option>
+                            <?php endif; ?>
                 </select>
                 </div>
             </div>
