@@ -7,15 +7,16 @@ $obj = new InstitucionesMunicipioController();
 $rows_inst = $obj->instituciones();
 $rows_dep = $obj->departamentos();
 $rows_mun = $obj->municipios_de_departamentos();
+$rows_est = $obj->estados();
 ?>
 <link rel="stylesheet" type="text/css" href="/assest/css/agregarInst.css">
 <div class="modal">
     <div class="modal-container">
         <h2>Agregar una Sede Nueva</h2>
         <form action="store_inst_mun.php" method="POST" autocomplete="off">
-        <label for="exampleInputEmail1" class="form-label">INSTITUCION</label>
+            <label for="exampleInputEmail1" class="form-label">INSTITUCION</label>
             <div class="custom_select">
-            <select name="cod_inst" required class="form-control">
+            <select name="codigo_ies_padre" required class="form-control">
                             <option value=''>Seleccione Institucion</option>
                             <?php if ($rows_inst): ?>
                             <?php foreach ($rows_inst as $row_i): ?>
@@ -69,10 +70,17 @@ $rows_mun = $obj->municipios_de_departamentos();
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">ESTADO</label>
                 <div class="custom_select">
-                <select name="cod_estado" required class="form-control" id="cod_estado">
-                    <option value="">Seleccione</option>
-                    <option value="est1">Inactiva</option>
-                    <option value="est2">Activa</option>
+                <select name="cod_estado" class="form-control">
+                            <option value=''>Seleccione Estado</option>
+                            <?php if ($rows_est): ?>
+                            <?php foreach ($rows_est as $row_e): ?>
+                            <option value='<?=$row_e['cod_estado']?>'>
+                            <?= $row_e['nomb_estado'] ?>
+                            </option>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                            <option>No Hay Registros</option>
+                            <?php endif; ?>
                 </select>
                 </div>
             </div>

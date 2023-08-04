@@ -10,16 +10,17 @@ class InstitucionesMunicipioModel
         $db = new db();
         $this->PDO = $db->conexion();
     }
-    public function insertar($codigo_ies_padre, $cod_depto, $cod_munic, $telefono, $cod_estado, $acreditada){
+    public function insertar($codigo_ies_padre, $cod_munic, $telefono, $cod_estado, $acreditada){
         try {
             $statement = $this->PDO->prepare(
-                "INSERT INTO instituciones (codigo_ies_padre, nomb_inst, cod_sector, cod_academ) 
-                VALUES (:codigo_ies_padre, :nomb_inst, :cod_sector, :cod_academ)"
+                "INSERT INTO inst_por_municipio(codigo_ies_padre, cod_munic, telefono, cod_estado, acreditada) 
+                VALUES (:codigo_ies_padre,:cod_munic,:telefono,:cod_estado,:acreditada)"
             );
             $statement->bindParam(":codigo_ies_padre", $codigo_ies_padre);
-            $statement->bindParam(":nomb_inst", $nomb_inst);
-            $statement->bindParam(":cod_sector", $cod_sector);
-            $statement->bindParam(":cod_academ", $cod_academ);
+            $statement->bindParam(":cod_munic", $cod_munic);
+            $statement->bindParam(":telefono", $telefono);
+            $statement->bindParam(":cod_estado", $cod_estado);
+            $statement->bindParam(":acreditada", $acreditada);
             
             return ($statement->execute()); 
 
@@ -120,16 +121,16 @@ class InstitucionesMunicipioModel
         i.pagina_web,
         i.codigo_ies_padre
         FROM inst_por_municipio i
-        JOIN instituciones p ON p.codigo_ies_padre = i.codigo_ies_padre
-        JOIN municipio m ON m.cod_munic = i.cod_munic
-        JOIN departamento d ON d.cod_depto = m.cod_depto
-        JOIN naturaleza_juridica nj ON nj.cod_juridica = i.cod_juridica
-        JOIN estado e ON e.cod_estado = i.cod_estado
-        JOIN seccional s ON s.cod_seccional = i.cod_seccional
-        JOIN acto_admon aa ON aa.cod_admon = i.cod_admon
-        JOIN norma_creacion nc ON nc.cod_norma = i.cod_norma
-        JOIN sectores sec ON sec.cod_sector = p.cod_sector
-        JOIN caracter_academico ca ON ca.cod_academ = p.cod_academ
+        LEFT JOIN instituciones p ON p.codigo_ies_padre = i.codigo_ies_padre
+        LEFT JOIN municipio m ON m.cod_munic = i.cod_munic
+        LEFT JOIN departamento d ON d.cod_depto = m.cod_depto
+        LEFT JOIN naturaleza_juridica nj ON nj.cod_juridica = i.cod_juridica
+        LEFT JOIN estado e ON e.cod_estado = i.cod_estado
+        LEFT JOIN seccional s ON s.cod_seccional = i.cod_seccional
+        LEFT JOIN acto_admon aa ON aa.cod_admon = i.cod_admon
+        LEFT JOIN norma_creacion nc ON nc.cod_norma = i.cod_norma
+        LEFT JOIN sectores sec ON sec.cod_sector = p.cod_sector
+        LEFT JOIN caracter_academico ca ON ca.cod_academ = p.cod_academ
         ORDER BY CAST(i.cod_inst AS INTEGER)
         ");
         return ($statement->execute()) ? $statement->fetchAll() : false;
@@ -309,6 +310,11 @@ class InstitucionesMunicipioModel
         municipio m on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic inner join 
         instituciones ins on i.codigo_ies_padre=ins.codigo_ies_padre  group by i.codigo_ies_padre, d.cod_depto, nomb_depto
         ");
+        return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
+
+    public function estados() {
+        $statement = $this->PDO->prepare("SELECT cod_estado, nomb_estado from estado");
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }
 

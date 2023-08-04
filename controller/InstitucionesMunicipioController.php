@@ -66,16 +66,9 @@
             }
         }
 
-        public function insertar($codigo_ies_padre, $nomb_inst, $cod_sector, $cod_academ, $cod_inst, 
-        $cod_munic, $telefono, $cod_estado){
-            $result=$this->model->insertar($codigo_ies_padre, $nomb_inst, $cod_sector, $cod_academ, $cod_inst, 
-            $cod_munic, $telefono, $cod_estado);
-            if($result != false){
-                return header("Location:show_inst_mun.php?cod_inst=".$cod_inst . "&cod_munic=" .$cod_munic  );
-            } else {
-                return header("Location: index_inst_mun.php");
-            }
-            
+        public function insertar($codigo_ies_padre, $cod_munic, $telefono, $cod_estado, $acreditada){
+            $result=$this->model->insertar($codigo_ies_padre, $cod_munic, $telefono, $cod_estado, $acreditada);
+            return header("Location: index_inst_mun.php");
         }
 
         public function insertar_inst($nomb_inst, $cod_sector, $cod_academ){
@@ -97,6 +90,10 @@
 
         public function municipios_de_departamentos(){
             return ($this->model->municipios_de_departamentos()) ? $this->model->municipios_de_departamentos() : false;
+        }
+
+        public function estados(){
+            return ($this->model->estados()) ? $this->model->estados() : false;
         }
 
         public function municipios_de_departamentos_por_instituciones(){
