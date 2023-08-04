@@ -318,6 +318,26 @@ class InstitucionesMunicipioModel
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }
 
+    public function naturaleza_juridica() {
+        $statement = $this->PDO->prepare("SELECT cod_juridica, nomb_juridica from naturaleza_juridica");
+        return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
+
+    public function seccional() {
+        $statement = $this->PDO->prepare("SELECT cod_seccional, nomb_seccional from seccional");
+        return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
+
+    public function acto_admon() {
+        $statement = $this->PDO->prepare("SELECT cod_admon, nomb_admon from acto_admon order by nomb_admon");
+        return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
+
+    public function norma_creacion() {
+        $statement = $this->PDO->prepare("SELECT cod_norma, nomb_norma from norma_creacion");
+        return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
+
     public function municipios_de_departamentos_por_instituciones() {
         $statement = $this->PDO->prepare("SELECT i.codigo_ies_padre as cod_ies, d.cod_depto, m.cod_munic, nomb_munic FROM departamento d inner join 
         municipio m on m.cod_depto=d.cod_depto inner join inst_por_municipio i on i.cod_munic=m.cod_munic inner join 

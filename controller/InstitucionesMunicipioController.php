@@ -96,6 +96,22 @@
             return ($this->model->estados()) ? $this->model->estados() : false;
         }
 
+        public function naturaleza_juridica(){
+            return ($this->model->naturaleza_juridica()) ? $this->model->naturaleza_juridica() : false;
+        }
+
+        public function seccional(){
+            return ($this->model->seccional()) ? $this->model->seccional() : false;
+        }
+
+        public function acto_admon(){
+            return ($this->model->acto_admon()) ? $this->model->acto_admon() : false;
+        }
+
+        public function norma_creacion(){
+            return ($this->model->norma_creacion()) ? $this->model->norma_creacion() : false;
+        }
+
         public function municipios_de_departamentos_por_instituciones(){
             return ($this->model->municipios_de_departamentos_por_instituciones()) ? $this->model->municipios_de_departamentos_por_instituciones(): false;
         }

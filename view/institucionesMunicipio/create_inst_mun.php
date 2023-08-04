@@ -8,6 +8,10 @@ $rows_inst = $obj->instituciones();
 $rows_dep = $obj->departamentos();
 $rows_mun = $obj->municipios_de_departamentos();
 $rows_est = $obj->estados();
+$rows_nat = $obj->naturaleza_juridica();
+$rows_sec = $obj->seccional();
+$rows_act = $obj->acto_admon();
+$rows_nor = $obj->norma_creacion();
 ?>
 <link rel="stylesheet" type="text/css" href="/assest/css/agregarInst.css">
 <div class="modal">
@@ -66,6 +70,62 @@ $rows_est = $obj->estados();
                     <input type="text" name="telefono" autocomplete="off" required class="form-control" maxlength="10"
                         onkeypress="return soloNumeros(event)">
                 </div>
+            </div>
+            <label for="exampleInputEmail1" class="form-label">NATURALEZA JURIDICA</label>
+            <div class="custom_select">
+            <select name="cod_juridica" required class="form-control">
+                            <option value=''>Seleccione Naturaleza Juridica</option>
+                            <?php if ($rows_nat): ?>
+                            <?php foreach ($rows_nat as $row_n): ?>
+
+                            <option value='<?=$row_n['cod_juridica']?>'><?= $row_n['nomb_juridica'] ?></option>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                            <option>No Hay Registros</option>
+                            <?php endif; ?>
+            </select>
+            </div>
+            <label for="exampleInputEmail1" class="form-label">SECCIONAL</label>
+            <div class="custom_select">
+            <select name="cod_seccional" required class="form-control">
+                            <option value=''>Seleccione Seccional</option>
+                            <?php if ($rows_sec): ?>
+                            <?php foreach ($rows_sec as $row_s): ?>
+
+                            <option value='<?=$row_s['cod_seccional']?>'><?= $row_s['nomb_seccional'] ?></option>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                            <option>No Hay Registros</option>
+                            <?php endif; ?>
+            </select>
+            </div>
+            <label for="exampleInputEmail1" class="form-label">ACTO ADMINISTRATIVO</label>
+            <div class="custom_select">
+            <select name="cod_admon" required class="form-control">
+                            <option value=''>Seleccione Acto Administrativo</option>
+                            <?php if ($rows_act): ?>
+                            <?php foreach ($rows_act as $row_a): ?>
+
+                            <option value='<?=$row_a['cod_admon']?>'><?= $row_a['nomb_admon'] ?></option>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                            <option>No Hay Registros</option>
+                            <?php endif; ?>
+            </select>
+            </div>
+            <label for="exampleInputEmail1" class="form-label">NORMA CREACION</label>
+            <div class="custom_select">
+            <select name="cod_norma" required class="form-control">
+                            <option value=''>Seleccione Norma Creacion</option>
+                            <?php if ($rows_nor): ?>
+                            <?php foreach ($rows_nor as $rows_n): ?>
+
+                            <option value='<?=$rows_n['cod_norma']?>'><?= $rows_n['nomb_norma'] ?></option>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                            <option>No Hay Registros</option>
+                            <?php endif; ?>
+            </select>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">ESTADO</label>
