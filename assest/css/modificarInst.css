@@ -244,7 +244,7 @@ input[type="number"]{
 div.mb-3:nth-child(10) > div:nth-child(2) {
   width: 20%;
   margin: 5 auto;
- }
+}
  #modificar[type="text"]{
   border:none;
   background: rgba(71, 191, 75, 0.3);

@@ -66,8 +66,44 @@
             }
         }
 
-        public function insertar($codigo_ies_padre, $cod_munic, $telefono, $cod_estado, $acreditada){
-            $result=$this->model->insertar($codigo_ies_padre, $cod_munic, $telefono, $cod_estado, $acreditada);
+        public function insertar(
+        $codigo_ies_padre, 
+        $cod_munic, 
+        $cod_estado, 
+        $programas_vigente,
+        $acreditada, 
+        $fecha_acreditacion, 
+        $resolucion_acreditacion, 
+        $vigencia,
+        $direccion,
+        $telefono,
+        $cod_juridica,
+        $cod_seccional,
+        $cod_admon,
+        $cod_norma,
+        $norma,
+        $fecha_creacion,
+        $nit,
+        $pagina_web){
+            $result=$this->model->insertar(
+            $codigo_ies_padre, 
+            $cod_munic, 
+            $cod_estado, 
+            $programas_vigente,
+            $acreditada, 
+            $fecha_acreditacion, 
+            $resolucion_acreditacion, 
+            $vigencia,
+            $direccion,
+            $telefono,
+            $cod_juridica,
+            $cod_seccional,
+            $cod_admon,
+            $cod_norma,
+            $norma,
+            $fecha_creacion,
+            $nit,
+            $pagina_web);
             return header("Location: index_inst_mun.php");
         }
 

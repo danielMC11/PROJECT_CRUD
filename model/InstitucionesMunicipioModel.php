@@ -10,17 +10,85 @@ class InstitucionesMunicipioModel
         $db = new db();
         $this->PDO = $db->conexion();
     }
-    public function insertar($codigo_ies_padre, $cod_munic, $telefono, $cod_estado, $acreditada){
+    public function insertar(
+    $codigo_ies_padre, 
+    $cod_munic, 
+    $cod_estado, 
+    $programas_vigente,
+    $acreditada, 
+    $fecha_acreditacion, 
+    $resolucion_acreditacion, 
+    $vigencia,
+    $direccion,
+    $telefono,
+    $cod_juridica,
+    $cod_seccional,
+    $cod_admon,
+    $cod_norma,
+    $norma,
+    $fecha_creacion,
+    $nit,
+    $pagina_web){
         try {
             $statement = $this->PDO->prepare(
-                "INSERT INTO inst_por_municipio(codigo_ies_padre, cod_munic, telefono, cod_estado, acreditada) 
-                VALUES (:codigo_ies_padre,:cod_munic,:telefono,:cod_estado,:acreditada)"
+                "INSERT INTO inst_por_municipio(
+                codigo_ies_padre, 
+                cod_munic, 
+                cod_estado, 
+                programas_vigente,
+                acreditada, 
+                fecha_acreditacion, 
+                resolucion_acreditacion, 
+                vigencia,
+                direccion,
+                telefono,
+                cod_juridica,
+                cod_seccional,
+                cod_admon,
+                cod_norma,
+                norma,
+                fecha_creacion,
+                nit,
+                pagina_web) 
+                VALUES (
+                :codigo_ies_padre, 
+                :cod_munic, 
+                :cod_estado, 
+                :programas_vigente,
+                :acreditada, 
+                :fecha_acreditacion, 
+                :resolucion_acreditacion, 
+                :vigencia,
+                :direccion,
+                :telefono,
+                :cod_juridica,
+                :cod_seccional,
+                :cod_admon,
+                :cod_norma,
+                :norma,
+                :fecha_creacion,
+                :nit,
+                :pagina_web
+                )"
             );
             $statement->bindParam(":codigo_ies_padre", $codigo_ies_padre);
             $statement->bindParam(":cod_munic", $cod_munic);
-            $statement->bindParam(":telefono", $telefono);
             $statement->bindParam(":cod_estado", $cod_estado);
+            $statement->bindParam(":cod_estado", $cod_estado);
+            $statement->bindParam(":programas_vigente", $programas_vigente);
             $statement->bindParam(":acreditada", $acreditada);
+            $statement->bindParam(":fecha_acreditacion", $fecha_acreditacion);
+            $statement->bindParam(":resolucion_acreditacion", $resolucion_acreditacion);
+            $statement->bindParam(":vigencia", $vigencia);
+            $statement->bindParam(":direccion", $direccion);
+            $statement->bindParam(":cod_juridica", $cod_juridica);
+            $statement->bindParam(":cod_seccional", $cod_seccional);
+            $statement->bindParam(":cod_admon", $cod_admon);
+            $statement->bindParam(":cod_norma", $cod_norma);
+            $statement->bindParam(":norma", $norma);
+            $statement->bindParam(":fecha_creacion", $fecha_creacion);
+            $statement->bindParam(":nit", $nit);
+            $statement->bindParam(":pagina_web", $pagina_web);
             
             return ($statement->execute()); 
 

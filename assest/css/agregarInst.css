@@ -34,6 +34,15 @@
     width: 90%;
     transition: backgroud .5s;
   }
+  input[type="number"]{
+    border:none;
+    background: rgba(71, 191, 75, 0.3);
+    padding: 1rem 1.5rem;
+    padding-left: calc(1rem*3.5);
+    border-radius: 100px;
+    width: 90%;
+    transition: backgroud .5s;
+  }
   form {
     width: 100%;
     height: 700px;
@@ -169,4 +178,20 @@
   
   .btn:focus {
     outline: none;
+  }
+
+  input[type="date"]{
+    background-color: #45BF86;
+    padding: 15px;
+    position: relative;
+    transform: none;
+    top: 50%;
+    left: 50%;
+    font-family: "Roboto Mono", monospace;
+    font-size: 18px;
+    color: #222825;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    transform: translateX(-50%);
   }

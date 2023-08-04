@@ -35,3 +35,91 @@
         </form>
     </div>
 </div>
+
+<!--Digitar solo numeros de telefono-->
+<script>
+function soloNumeros(event) {
+    var charCode = event.which ? event.which : event.keyCode;
+    if (charCode < 48 || charCode > 57) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
+</script>
+
+<!--Despliegue de atributos con respecto a la acreditacion cuando es S o N -->
+<script>
+function toggleAcreditadaSection() {
+    var selectAcreditada = document.getElementById("acreditada");
+    var acreditadaValue = selectAcreditada.value;
+    var acreditadaSections = document.getElementsByClassName("acreditada-section");
+
+    if (acreditadaValue == "S") {
+        for (var i = 0; i < acreditadaSections.length; i++) {
+            acreditadaSections[i].style.display = "block";
+            acreditadaSections[i].querySelectorAll("input, select").forEach(function(element) {
+                element.removeAttribute("disabled");
+            });
+        }
+    } else if (acreditadaValue == "N") {
+        for (var i = 0; i < acreditadaSections.length; i++) {
+            acreditadaSections[i].style.display = "none";
+            acreditadaSections[i].querySelectorAll("input, select").forEach(function(element) {
+                element.setAttribute("disabled", "disabled");
+            });
+        }
+    }
+}
+
+
+// Ejecutar la función al cargar la página para establecer el estado inicial
+toggleAcreditadaSection();
+</script>
+
+<!-- Validar la fecha de acreditacion mayor a la del dia actual -->
+<script>
+function validarFormulario() {
+    // Obtener el valor de la fecha de acreditación
+    var fechaAcreditacion = document.getElementsByName('fecha_acreditacion')[0].value;
+    // Obtener la fecha actual
+    var fechaActual = new Date().toISOString().split('T')[0];
+
+    var acreditacion = document.getElementsByName('acreditada')[0].value;
+
+    if (acreditacion == 'S') {
+        if (fechaAcreditacion > fechaActual) {
+            // Mostrar una alerta al usuario
+            alert("La fecha de acreditación no puede ser mayor a la fecha actual.");
+            // Evitar el envío del formulario
+            return false;
+        } else {
+            return true;
+        }
+    }
+}
+</script>
+
+<!--Vigencia acreditacion sea entre 1 y 10 -->
+<script>
+var vigenciaInput = document.getElementById("vigenciaInput");
+
+vigenciaInput.addEventListener("input", function() {
+    var value = parseInt(vigenciaInput.value);
+    if (isNaN(value) || value < 1 || value > 10) {
+        vigenciaInput.value = "";
+    }
+});
+</script>
+
+<!--Programas vigentes sea entre 1 y 999 -->
+<script>
+var programasInput = document.getElementById("programasInput");
+
+programasInput.addEventListener("input", function() {
+    var value = parseInt(programasInput.value);
+    if (isNaN(value) || value < 1 || value > 999) {
+        programasInput.value = "";
+    }
+});
+</script>
