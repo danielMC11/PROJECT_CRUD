@@ -1,6 +1,7 @@
 <?php
 require_once "/proyecto_crud/controller/InstitucionesMunicipioController.php";
 $obj = new InstitucionesMunicipioController();
+
 $obj->insertar(
 $_POST['codigo_ies_padre'], 
 $_POST['cod_munic'], 
@@ -20,4 +21,5 @@ $_POST['norma'],
 $_POST['fecha_creacion'],
 $_POST['nit'],
 $_POST['pagina_web']);
+
 ?>

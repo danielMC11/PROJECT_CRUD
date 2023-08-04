@@ -30,6 +30,7 @@ class InstitucionesMunicipioModel
     $nit,
     $pagina_web){
         try {
+    
             $statement = $this->PDO->prepare(
                 "INSERT INTO inst_por_municipio(
                 codigo_ies_padre, 
@@ -50,7 +51,7 @@ class InstitucionesMunicipioModel
                 fecha_creacion,
                 nit,
                 pagina_web) 
-                VALUES (
+                VALUES(
                 :codigo_ies_padre, 
                 :cod_munic, 
                 :cod_estado, 
@@ -74,12 +75,12 @@ class InstitucionesMunicipioModel
             $statement->bindParam(":codigo_ies_padre", $codigo_ies_padre);
             $statement->bindParam(":cod_munic", $cod_munic);
             $statement->bindParam(":cod_estado", $cod_estado);
-            $statement->bindParam(":cod_estado", $cod_estado);
             $statement->bindParam(":programas_vigente", $programas_vigente);
             $statement->bindParam(":acreditada", $acreditada);
             $statement->bindParam(":fecha_acreditacion", $fecha_acreditacion);
             $statement->bindParam(":resolucion_acreditacion", $resolucion_acreditacion);
             $statement->bindParam(":vigencia", $vigencia);
+            $statement->bindParam(":telefono", $telefono);
             $statement->bindParam(":direccion", $direccion);
             $statement->bindParam(":cod_juridica", $cod_juridica);
             $statement->bindParam(":cod_seccional", $cod_seccional);

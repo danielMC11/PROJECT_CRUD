@@ -35,7 +35,7 @@ $rows_nor = $obj->norma_creacion();
             <div class="mb-3">
                 <label class="form-label">DEPARTAMENTO</label>
                 <div class="custom_select">
-                <select name="cod_depto" required class="form-control" id="cod_depto">
+                <select required class="form-control" id="cod_depto">
                             <option value=''>Seleccione Departamento</option>
                             <?php if ($rows_dep): ?>
                             <?php foreach ($rows_dep as $row_d): ?>
@@ -102,7 +102,6 @@ $rows_nor = $obj->norma_creacion();
                 <label for="staticEmail" class="col-sm-2 col-form-label">FECHA ACREDITACION</label>
                 <div class="col-sm-10">
                     <input type="date" name="fecha_acreditacion" require class="form-control">
-
                 </div>
             </div>
             <!--Llenado de resolucion acreditacion usando la funcion soloNumeros()-->
@@ -199,20 +198,20 @@ $rows_nor = $obj->norma_creacion();
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">FECHA CREACION</label>
+                <label class="col-sm-2 col-form-label">FECHA CREACION</label>
                 <div class="col-sm-10">
                      <input type="date" name="fecha_creacion" require class="form-control">
 
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">NIT</label>
+                <label class="col-sm-2 col-form-label">NIT</label>
                 <div class="col-sm-10">
                     <input type="text" name="nit"  class="form-control-plaintext">
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">PAGINA WEB</label>
+                <label class="col-sm-2 col-form-label">PAGINA WEB</label>
                 <div class="col-sm-10">
                     <input type="text" name="pagina_web" class="form-control-plaintext">
                 </div>
