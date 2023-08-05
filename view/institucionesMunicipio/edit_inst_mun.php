@@ -5,7 +5,8 @@ require_once "/proyecto_crud/controller/InstitucionesMunicipioController.php";
 
 if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
     $obj = new InstitucionesMunicipioController();
-    $rectoria = $obj->show($_GET['cod_inst'], $_GET['cod_munic']);
+    $rows_est = $obj->estados();
+    $data = $obj->show($_GET['cod_inst'], $_GET['cod_munic']);
 } else {
     echo "HUBO UN ERROR :(";
     exit;
@@ -14,65 +15,69 @@ if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
 <link rel="stylesheet" type="text/css" href="/assest/css/modificarInst.css">
 <div class="modal">
     <div class="modal-container">
-        <form action="update_inst_mun.php?&cod_munic=<?= $rectoria['cod_munic']?>" method="POST"
+        <form action="update_inst_mun.php?&cod_munic=<?= $data['cod_munic']?>" method="POST"
             onsubmit="return validarFormulario()">
             <h2>MODIFICANDO REGISTRO</h2>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">IES</label>
                 <div class="col-sm-10">
                     <input type="text" name="codigo_ies_padre" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['codigo_ies_padre']?>">
+                        value="<?= $data['codigo_ies_padre']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">CODIGO INSTITUCION</label>
                 <div class="col-sm-10">
                     <input type="text" name="cod_inst" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['cod_inst']?>">
+                        value="<?= $data['cod_inst']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">INSTITUCION</label>
                 <div class="col-sm-10">
                     <input type="text" name="nomb_inst" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['nomb_inst']?>">
+                        value="<?= $data['nomb_inst']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">SECTOR</label>
                 <div class="col-sm-10">
                     <input type="text" name="nomb_sector" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['nomb_sector']?>">
+                        value="<?= $data['nomb_sector']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">CARACTER ACADEMICO</label>
                 <div class="col-sm-10">
                     <input type="text" name="nomb_academ" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['nomb_academ']?>">
+                        value="<?= $data['nomb_academ']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">DEPARTAMENTO</label>
                 <div class="col-sm-10">
-                    <input type="text" name="nomb_depto" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['nomb_depto']?>">
+                    <input type="text" name="nomb_depto" required class="form-control-plaintext"
+                        value="<?= $data['nomb_depto']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">MUNICIPIO</label>
                 <div class="col-sm-10">
-                    <input type="text" name="nomb_munic" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['nomb_munic']?>">
+                    <input type="text" name="nomb_munic" required class="form-control-plaintext"
+                        value="<?= $data['nomb_munic']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">ESTADO</label>
                 <div class="custom_select">
                     <select name="cod_estado" required class="form-control" id="cod_estado">
-                        <option value="">Seleccione</option>
-                        <option value="est1">Inactiva</option>
-                        <option value="est2">Activa</option>
+                    <option value='<?= $data['cod_estado'] ?>'><?= $data['nomb_estado'] ?></option>
+                    <?php 
+                    foreach ($rows_est as $row_e) {
+                    if ($row_e['nomb_estado'] !== $data['nomb_estado']) {    
+                    echo '<option value="' . $row_e['cod_estado'] . '">' . $row_e['nomb_estado'] . '</option>';                                }
+                    }
+                    ?> 
                     </select>
                 </div>
             </div>
@@ -80,7 +85,7 @@ if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
                 <label for="staticEmail" class="col-sm-2 col-form-label">PROGRAMAS VIGENTES</label>
                 <div style="width: 20%; margin: 50 auto" class="col-sm-10">
                     <input type="number" id="programasInput" name="programas_vigente" autocomplete="off" required
-                        class="form-control" value="<?= $rectoria['programas_vigente']?>">
+                        class="form-control" value="<?= $data['programas_vigente']?>">
                 </div>
             </div>
             <div class="mb-3 row">
@@ -98,7 +103,7 @@ if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
                 <label for="staticEmail" class="col-sm-2 col-form-label">FECHA ACREDITACION</label>
                 <div class="col-sm-10">
                     <input type="date" name="fecha_acreditacion" require class="form-control"
-                        value="<?= $rectoria['fecha_acreditacion'] ?>">
+                        value="<?= $data['fecha_acreditacion'] ?>">
 
                 </div>
             </div>
@@ -108,14 +113,14 @@ if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
                 <div class="col-sm-10">
                     <input type="text" id="modificar" name="resolucion_acreditacion" autocomplete="off" require class="form-control"
                         maxlength="7" onkeypress="return soloNumeros(event)"
-                        value="<?= $rectoria['resolucion_acreditacion']?>">
+                        value="<?= $data['resolucion_acreditacion']?>">
                 </div>
             </div>
             <div class="mb-3 row acreditada-section">
                 <label for="staticEmail" class="col-sm-2 col-form-label">VIGENCIA ACREDITACION</label>
                 <div class="col-sm-10">
                     <input type="number" id="vigenciaInput" name="vigencia" autocomplete="off" required
-                        class="form-control" value="<?= $rectoria['vigencia']?>">
+                        class="form-control" value="<?= $data['vigencia']?>">
                 </div>
             </div>
             <!--Llenado de telefono usando la funcion soloNumeros()-->
@@ -123,14 +128,14 @@ if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
                 <label for="exampleInputEmail1" class="col-sm-2 col-form-label">TELEFONO</label>
                 <div  class="col-sm-10">
                     <input type="text" name="telefono" autocomplete="off" required class="form-control" id="modificar" maxlength="10"
-                        onkeypress="return soloNumeros(event)" value="<?= $rectoria['telefono'] ?>">
+                        onkeypress="return soloNumeros(event)" value="<?= $data['telefono'] ?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="exampleInputEmail1" class="col-sm-2 col-form-label">DIRECCION</label>
                 <div  class="col-sm-10">
                     <input type="text" name="direccion" id="modificar" autocomplete="off" required class="form-control" maxlength="100"
-                        value="<?= $rectoria['direccion'] ?>">
+                        value="<?= $data['direccion'] ?>">
                 </div>
             </div>
             <div class="mb-3 row">
@@ -160,35 +165,35 @@ if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
                 <label for="staticEmail" class="col-sm-2 col-form-label">ACTO ADMINISTRATIVO</label>
                 <div class="col-sm-10">
                     <input type="text" name="nomb_admon" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['nomb_admon']?>">
+                        value="<?= $data['nomb_admon']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">NORMA</label>
                 <div class="col-sm-10">
                     <input type="text" name="norma" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['norma']?>">
+                        value="<?= $data['norma']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">FECHA CREACION</label>
                 <div class="col-sm-10">
                     <input type="text" name="fecha_creacion" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['fecha_creacion']?>">
+                        value="<?= $data['fecha_creacion']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">NIT</label>
                 <div class="col-sm-10">
                     <input type="text" name="nit" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['nit']?>">
+                        value="<?= $data['nit']?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">PAGINA WEB</label>
                 <div class="col-sm-10">
                     <input type="text" name="pagina_web" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['pagina_web']?>">
+                        value="<?= $data['pagina_web']?>">
                 </div>
             </div>
             <div>

@@ -272,6 +272,7 @@ class InstitucionesMunicipioModel
         (SELECT nomb_depto FROM departamento WHERE departamento.cod_depto = (SELECT cod_depto FROM municipio m WHERE m.cod_munic = i.cod_munic)),
         (SELECT nomb_juridica FROM naturaleza_juridica n WHERE n.cod_juridica = i.cod_juridica),
         (SELECT nomb_estado FROM estado e WHERE e.cod_estado = i.cod_estado),
+        (SELECT e.cod_estado FROM estado e WHERE e.cod_estado = i.cod_estado),
         (SELECT nomb_seccional FROM seccional s WHERE s.cod_seccional = i.cod_seccional),
         (SELECT nomb_admon FROM acto_admon a WHERE a.cod_admon = i.cod_admon),
         (SELECT nomb_norma FROM norma_creacion nc WHERE nc.cod_norma = i.cod_norma),
