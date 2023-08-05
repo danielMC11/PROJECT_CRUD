@@ -6,6 +6,8 @@ require_once "/proyecto_crud/controller/InstitucionesMunicipioController.php";
 if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
     $obj = new InstitucionesMunicipioController();
     $rows_est = $obj->estados();
+    $rows_nat = $obj->naturaleza_juridica();
+    $rows_sec = $obj->seccional();
     $data = $obj->show($_GET['cod_inst'], $_GET['cod_munic']);
 } else {
     echo "HUBO UN ERROR :(";
@@ -15,7 +17,7 @@ if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
 <link rel="stylesheet" type="text/css" href="/assest/css/modificarInst.css">
 <div class="modal">
     <div class="modal-container">
-        <form action="update_inst_mun.php?&cod_munic=<?= $data['cod_munic']?>" method="POST"
+        <form id='update-form' action="update_inst_mun.php?&cod_munic=<?= $data['cod_munic']?>" method="POST"
             onsubmit="return validarFormulario()">
             <h2>MODIFICANDO REGISTRO</h2>
             <div class="mb-3 row">
@@ -93,9 +95,15 @@ if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
                 <div class="custom_select">
                     <select name="acreditada" required class="form-control" id="acreditada"
                         onchange="toggleAcreditadaSection()">
-                        <option value="">Seleccione</option>
-                        <option value="S">Si</option>
-                        <option value="N">No</option>
+                        <?php
+                        if($data['acreditada']=='S'){
+                            echo "<option value='S'>Si</option>";
+                            echo "<option value='N'>No</option>";
+                        }else if($data['acreditada']=='N'){
+                            echo "<option value='N'>No</option>";
+                            echo "<option value='S'>Si</option>";
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
@@ -142,22 +150,28 @@ if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
                 <label for="staticEmail" class="col-sm-2 col-form-label">NATURALEZA JURIDICA</label>
                 <div class="custom_select">
                     <select name="cod_juridica" required class="form-control" id="cod_juridica">
-                        <option value="">Seleccione</option>
-                        <option value="nj1">Municipal</option>
-                        <option value="nj2">Nacional</option>
-                        <option value="nj3">Fundación</option>
-                        <option value="nj4">Departamental</option>
-                        <option value="nj5">Corporación</option>
+                    <option value='<?= $data['cod_juridica'] ?>'><?= $data['nomb_juridica'] ?></option>
+                    <?php 
+                    foreach ($rows_nat as $row_n) {
+                    if ($row_n['nomb_juridica'] !== $data['nomb_juridica']) {    
+                    echo '<option value="' . $row_n['cod_juridica'] . '">' . $row_n['nomb_juridica'] . '</option>';                                }
+                    }
+                    ?> 
                     </select>
+                    
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">SECCIONAL</label>
                 <div class="custom_select">
                     <select name="cod_seccional" required class="form-control" id="cod_seccional">
-                        <option value="">Seleccione</option>
-                        <option value="ps1">Seccional</option>
-                        <option value="ps2">Principal</option>
+                        <option value='<?= $data['cod_seccional'] ?>'><?= $data['nomb_seccional'] ?></option>
+                        <?php 
+                        foreach ($rows_sec as $row_s) {
+                        if ($row_s['nomb_seccional'] !== $data['nomb_seccional']) {    
+                        echo '<option value="' . $row_s['cod_seccional'] . '">' . $row_s['nomb_seccional'] . '</option>';                                }
+                        }
+                        ?> 
                     </select>
                 </div>
             </div>
@@ -200,7 +214,7 @@ if (isset($_GET['cod_inst']) && isset($_GET['cod_munic'])) {
 
                 <div>
 
-                    <input type="submit" class="btn btn-success" value="ACTUALIZAR">
+                    <input type="submit" class="btn btn-success" onclick="validarCambios()" value="ACTUALIZAR">
                     <a class="btn btn-danger" href="index_inst_mun.php">CANCELAR</a>
                 </div>
         </form>
@@ -293,4 +307,43 @@ programasInput.addEventListener("input", function() {
         programasInput.value = "";
     }
 });
+</script>
+
+
+<script>
+  function validarCambios() {
+    // Obtener los valores originales del formulario desde PHP
+    var old_estado = "<?php echo $data['cod_estado']; ?>";
+    var old_programas = "<?php echo $data['programas_vigente']; ?>";
+    var old_acreditada = "<?php echo $data['acreditada']; ?>";
+    var old_telefono = "<?php echo $data['telefono']; ?>";
+    var old_direccion = "<?php echo $data['direccion']; ?>";
+    var old_juridica = "<?php echo $data['cod_juridica']; ?>";
+    var old_seccional = "<?php echo $data['cod_seccional']; ?>";
+
+
+   
+
+    var new_estado = document.getElementById("update-form").cod_estado.value;
+    var new_programas = document.getElementById("update-form").programas_vigente.value;
+    var new_acreditada = document.getElementById("update-form").acreditada.value;
+    var new_telefono = document.getElementById("update-form").telefono.value;
+    var new_direccion = document.getElementById("update-form").direccion.value;
+    var new_juridica = document.getElementById("update-form").cod_juridica.value;
+    var new_seccional = document.getElementById("update-form").cod_seccional.value;
+    
+    if (old_estado === new_estado 
+    && old_programas === new_programas
+    && old_programas === new_programas
+    && old_acreditada === new_acreditada
+    && old_telefono === new_telefono
+    && old_direccion === new_direccion
+    && old_juridica === new_juridica
+    && old_seccional === new_seccional
+    ) {
+      alert("No se ha realizado ninguna actualización.");
+    } else {
+      document.getElementById("update-form").submit();
+    }
+  }
 </script>
