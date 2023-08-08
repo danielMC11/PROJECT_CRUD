@@ -332,14 +332,14 @@ programasInput.addEventListener("input", function() {
     var new_juridica = document.getElementById("update-form").cod_juridica.value;
     var new_seccional = document.getElementById("update-form").cod_seccional.value;
     
-    if (old_estado === new_estado 
-    && old_programas === new_programas
-    && old_programas === new_programas
-    && old_acreditada === new_acreditada
-    && old_telefono === new_telefono
-    && old_direccion === new_direccion
-    && old_juridica === new_juridica
-    && old_seccional === new_seccional
+    if (
+    (!old_estado || (old_estado === new_estado)) &&  
+    (!old_programas || (old_programas === new_programas)) &&  
+    (!old_acreditada || (old_acreditada === new_acreditada)) &&  
+    (!old_telefono || (old_telefono === new_telefono)) &&  
+    (!old_direccion || (old_direccion === new_direccion)) &&  
+    (!old_juridica || (old_juridica === new_juridica)) &&  
+    (!old_seccional || (old_seccional === new_seccional)) &&  
     ) {
       alert("No se ha realizado ninguna actualización.");
     } else {
