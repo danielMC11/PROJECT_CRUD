@@ -139,6 +139,12 @@ class RectoriaModel {
         return ($statement->execute()) ? $statement->fetchAll() : false;
        }
 
+    public function instituciones() {
+    $statement = $this->PDO->prepare("SELECT codigo_ies_padre , nomb_inst FROM instituciones
+    order by nomb_inst");
+    return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
+
     public function logs_rectoria() {
         $statement = $this->PDO->prepare("SELECT * from rectoria_auditoria_mod");
         return ($statement->execute()) ? $statement->fetchAll() : false;

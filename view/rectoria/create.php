@@ -1,3 +1,12 @@
+<?php 
+require_once "/proyecto_crud/view/head/head.php";
+require_once "/proyecto_crud/controller/RectoriaController.php";
+
+$obj = new RectoriaController();
+$rows_inst = $obj->instituciones();
+
+?>
+
 <link rel="stylesheet" type="text/css" href="/assest/css/agregarDir.css">
 
 <div class="modal">

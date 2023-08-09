@@ -43,6 +43,10 @@ class RectoriaController {
         return ($this->model->reporte_dir($codigo_ies_padre,$fecha_inicio,$fecha_final)) ? $this->model->reporte_dir($codigo_ies_padre,$fecha_inicio,$fecha_final): false;
     }
 
+    public function instituciones(){
+        return ($this->model->instituciones()) ? $this->model->instituciones(): false;
+    }
+
     public function logs_rectoria() {
         return ($this->model->logs_rectoria()) ? $this->model->logs_rectoria() : false;
     }
