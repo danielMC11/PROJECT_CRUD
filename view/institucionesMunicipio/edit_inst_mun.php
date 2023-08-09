@@ -312,39 +312,71 @@ programasInput.addEventListener("input", function() {
 
 <script>
   function validarCambios() {
+    event.preventDefault();
     // Obtener los valores originales del formulario desde PHP
     var old_estado = "<?php echo $data['cod_estado']; ?>";
     var old_programas = "<?php echo $data['programas_vigente']; ?>";
-    var old_acreditada = "<?php echo $data['acreditada']; ?>";
     var old_telefono = "<?php echo $data['telefono']; ?>";
     var old_direccion = "<?php echo $data['direccion']; ?>";
     var old_juridica = "<?php echo $data['cod_juridica']; ?>";
     var old_seccional = "<?php echo $data['cod_seccional']; ?>";
 
-
-   
-
+    
     var new_estado = document.getElementById("update-form").cod_estado.value;
     var new_programas = document.getElementById("update-form").programas_vigente.value;
-    var new_acreditada = document.getElementById("update-form").acreditada.value;
     var new_telefono = document.getElementById("update-form").telefono.value;
     var new_direccion = document.getElementById("update-form").direccion.value;
     var new_juridica = document.getElementById("update-form").cod_juridica.value;
     var new_seccional = document.getElementById("update-form").cod_seccional.value;
+
+    var old_acreditada = "<?php echo $data['acreditada']; ?>";
+
+    var new_acreditada = document.getElementById("update-form").acreditada.value;
+
+    if(old_acreditada === 'S'){
+    var old_fecha_acreditacion = "<?php echo $data['fecha_acreditacion']; ?>";
+    var old_resolucion_acreditacion = "<?php echo $data['resolucion_acreditacion']; ?>";
+    var old_vigencia = "<?php echo $data['vigencia']; ?>";
+
+    var new_fecha_acreditacion = document.getElementById("update-form").fecha_acreditacion.value;
+    var new_resolucion_acreditacion = document.getElementById("update-form").resolucion_acreditacion.value;
+    var new_vigencia = document.getElementById("update-form").vigencia.value;
+
+        if (
+        old_estado === new_estado &&
+        old_programas === new_programas &&
+        old_programas === new_programas  &&
+        old_acreditada === new_acreditada &&
+        old_telefono === new_telefono &&
+        old_direccion === new_direccion &&
+        old_juridica === new_juridica &&
+        old_seccional === new_seccional &&
+        old_fecha_acreditacion === new_fecha_acreditacion &&
+        old_resolucion_acreditacion === new_resolucion_acreditacion &&
+        old_vigencia === new_vigencia
+        ) {
+            alert("No se ha realizado ninguna actualización.");
+        } else {
+            document.getElementById("update-form").submit();
+        }
+    } else if (old_acreditada === 'N'){
+        if (
+        old_estado === new_estado 
+        && old_programas === new_programas
+        && old_programas === new_programas
+        && old_acreditada === new_acreditada
+        && old_telefono === new_telefono
+        && old_direccion === new_direccion
+        && old_juridica === new_juridica
+        && old_seccional === new_seccional
+        ) {
+            alert("No se ha realizado ninguna actualización.");
+        } else {
+            document.getElementById("update-form").submit();
+        }
+    }    
+
     
-    if (
-    old_estado === new_estado &&  
-    old_programas === new_programas &&  
-    old_acreditada === new_acreditada &&  
-    old_telefono === new_telefono &&  
-    old_direccion === new_direccion &&  
-    old_juridica === new_juridica &&  
-    old_seccional === new_seccional)
-    {
-      alert("No se ha realizado ninguna actualización.");
-    } else {
-      document.getElementById("update-form").submit();
-    }
   }
 </script>
 

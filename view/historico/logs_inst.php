@@ -10,10 +10,8 @@ $rows = $obj->logs_instituciones();
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">IES</th>
             <th scope="col">CÓDIGO INSTITUCION</th>
             <th scope="col">NOMBRE INSTITUCION</th>
-            <th scope="col">TELEFONO</th>
             <th scope="col">OPERACION</th>
             <th scope="col">MARCA DE TIEMPO</th>
             <th scope="col">USUARIO</th>
@@ -23,12 +21,10 @@ $rows = $obj->logs_instituciones();
         <?php if ($rows): ?>
             <?php foreach ($rows as $row): ?>
                 <tr>
-                    <th><?= $row['codigo_ies_padre'] ?></th>
                     <th><?= $row['cod_inst'] ?></th>
                     <th><?= $row['nomb_inst'] ?></th>
-                    <th><?= $row['telefono'] ?></th>
                     <th><?= $row['operacion'] ?></th>
-                    <th><?= $row['changed_on'] ?></th>
+                    <th><?= $row['marca_de_tiempo'] ?></th>
                     <th><?= $row['user_id'] ?></th>
                 </tr>
             <?php endforeach; ?>

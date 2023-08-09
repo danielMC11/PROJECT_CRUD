@@ -490,8 +490,7 @@ class InstitucionesMunicipioModel
     }
 
     public function logs_instituciones() {
-        $statement = $this->PDO->prepare("SELECT i.codigo_ies_padre, cod_inst, nomb_inst, telefono, operacion, changed_on, user_id from inst_auditoria_in 
-        i inner join inst_municipio_auditoria_in ins on i.codigo_ies_padre=ins.codigo_ies_padre");
+        $statement = $this->PDO->prepare("SELECT * from logs_inst_munic");
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }
 
