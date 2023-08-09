@@ -1,12 +1,14 @@
 <?php 
-require_once "/proyecto_crud/view/head/head.php";
 require_once "/proyecto_crud/controller/RectoriaController.php";
 
+
 $obj = new RectoriaController();
+
+
 $rows_inst = $obj->instituciones();
+$rows_inst_munic = $obj->inst_munic();
 
 ?>
-
 <link rel="stylesheet" type="text/css" href="/assest/css/agregarDir.css">
 
 <div class="modal">
@@ -14,10 +16,33 @@ $rows_inst = $obj->instituciones();
         <h2>Agregar un nuevo Directivo</h2>
     <form action="store.php" method="POST" autocomplete="off">
 
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">CODIGO DIRECTIVO</label>
-            <input type="text" name="cod_directivo" required class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
+        <label class="form-label">INSTITUCION</label>
+            <div class="custom_select">
+            <select name="codigo_ies_padre" id="cod_inst" required class="form-control">
+                            <option value=''>Seleccione Institucion</option>
+                            <?php if ($rows_inst): ?>
+                            <?php foreach ($rows_inst as $row_i): ?>
+
+                            <option value='<?=$row_i['codigo_ies_padre']?>'><?= $row_i['nomb_inst'] ?></option>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                            <option>No Hay Registros</option>
+                            <?php endif; ?>
+            </select>
+        </div>
+        <label class="form-label">SEDE</label>
+            <div class="custom_select">
+            <select name="cod_inst_cod_munic" id='cod_inst_cod_munic' required class="form-control">
+                            <option value=''>Seleccione Ciudad de la Sede</option>
+                            <?php if ($rows_inst_munic): ?>
+                            <?php foreach ($rows_inst_munic as $row_i): ?>
+
+                            <option value='<?=$row_i['cod_inst_cod_munic']?>' data-inst=<?=$row_i['codigo_ies_padre']?>><?= $row_i['sede'] ?></option>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                            <option>No Hay Registros</option>
+                            <?php endif; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">NOMBRE DIRECTIVO</label>
@@ -29,16 +54,7 @@ $rows_inst = $obj->instituciones();
             <input type="text" name="apell_directivo" required class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
         </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">CODIGO INSTITUCION</label>
-            <input type="text" name="cod_inst" required class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">CODIGO MUNICIPIO</label>
-            <input type="text" name="cod_munic" required class="form-control" id="cod_munic"
-                aria-describedby="emailHelp">
-        </div>
+       
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">CARGO</label>
             <div class="custom_select">
@@ -78,3 +94,30 @@ $rows_inst = $obj->instituciones();
     </form>
 </div>
 </div>
+
+<script>
+        const codInstSelect = document.getElementById('cod_inst');
+        const codInst_Munic_Select = document.getElementById('cod_inst_cod_munic');
+
+        const sedes = codInst_Munic_Select.querySelectorAll('option');
+
+
+
+        function actualizar() {
+
+            const selectedInst = codInstSelect.value;
+
+            for (let i = 0; i < sedes.length; i++) {
+                const sede = sedes[i]
+                const InstAsociada = sede.getAttribute('data-inst');
+                if (InstAsociada === selectedInst || selectedInst === '') {
+                    sede.style.display = 'block';
+
+                } else {
+                    sede.style.display = 'none';
+                }
+            }
+
+        }
+        codInstSelect.addEventListener('change', actualizar);
+</script>

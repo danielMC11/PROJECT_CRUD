@@ -47,6 +47,10 @@ class RectoriaController {
         return ($this->model->instituciones()) ? $this->model->instituciones(): false;
     }
 
+    public function inst_munic(){
+        return ($this->model->inst_munic()) ? $this->model->inst_munic(): false;
+    }
+
     public function logs_rectoria() {
         return ($this->model->logs_rectoria()) ? $this->model->logs_rectoria() : false;
     }

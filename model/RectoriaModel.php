@@ -10,17 +10,16 @@ class RectoriaModel {
         $this->PDO = $db->conexion();
     }
 
-    public function insertar($cod_directivo,$nomb_directivo,$apell_directivo,$cod_inst, $cod_munic,
-        $cod_cargo,$fecha_inicio,$fecha_final){
+    public function insertar($cod_inst_cod_munic, $nomb_directivo, 
+    $apell_directivo, $cod_cargo,$fecha_inicio,$fecha_final){
             $statement1 = $this->PDO->prepare(
-                "INSERT INTO directivos (cod_directivo, nomb_directivo,apell_directivo) 
-                VALUES (:cod_directivo, :nomb_directivo, :apell_directivo);");
-                $statement1->bindParam(":cod_directivo", $cod_directivo);
+                "INSERT INTO directivos (nomb_directivo,apell_directivo) 
+                VALUES (:nomb_directivo, :apell_directivo);");
                 $statement1->bindParam(":nomb_directivo", $nomb_directivo);
                 $statement1->bindParam(":apell_directivo", $apell_directivo);
             $statement2 = $this->PDO->prepare(
-                    "INSERT INTO rectoria (cod_directivo, cod_inst,cod_munic, cod_cargo,fecha_inicio,fecha_final) 
-                    VALUES (:cod_directivo, :cod_inst, :cod_munic, :cod_cargo,:fecha_inicio,:fecha_final)");
+                "INSERT INTO rectoria (cod_directivo, cod_inst,cod_munic, cod_cargo,fecha_inicio,fecha_final) 
+                VALUES (:cod_directivo, :cod_inst, :cod_munic, :cod_cargo,:fecha_inicio,:fecha_final)");
                 $statement2->bindParam(":cod_directivo", $cod_directivo);
                 $statement2->bindParam(":cod_inst", $cod_inst);
                 $statement2->bindParam(":cod_munic", $cod_munic);
@@ -144,6 +143,15 @@ class RectoriaModel {
     order by nomb_inst");
     return ($statement->execute()) ? $statement->fetchAll() : false;
     }
+
+    public function inst_munic() {
+    $statement = $this->PDO->prepare("SELECT codigo_ies_padre, CONCAT(cod_inst, ' ', cod_munic) as cod_inst_cod_munic,
+    CONCAT(cod_inst, ' / ', nomb_munic) as sede from inst_por_municipio join municipio 
+    using(cod_munic) order by CAST(cod_inst as INTEGER) asc");
+    return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
+
+
 
     public function logs_rectoria() {
         $statement = $this->PDO->prepare("SELECT * from rectoria_auditoria_mod");
