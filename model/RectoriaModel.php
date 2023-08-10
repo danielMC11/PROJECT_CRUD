@@ -59,7 +59,8 @@ class RectoriaModel {
             r.cod_inst,
             r.cod_munic,
             r.cod_directivo,
-            r.cod_cargo 
+            r.cod_cargo,
+            r.cod_nombram 
         FROM rectoria r
         LEFT JOIN directivos d ON d.cod_directivo = r.cod_directivo
         LEFT JOIN instituciones i ON i.codigo_ies_padre = (SELECT codigo_ies_padre FROM inst_por_municipio WHERE cod_inst = r.cod_inst)
@@ -104,17 +105,19 @@ class RectoriaModel {
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }
 
-    public function update($fecha_inicio, $fecha_final, $cod_directivo, $cod_inst, $cod_munic, $cod_cargo) {
+    public function update($fecha_inicio, $fecha_final, $cod_directivo, $cod_inst, $cod_munic, $id_cargo, $cod_cargo, $cod_nombram) {
         
         $statement = $this->PDO->prepare("UPDATE rectoria SET fecha_inicio=:fecha_inicio, 
-        fecha_final=:fecha_final WHERE cod_munic=:cod_munic AND 
-        cod_directivo=:cod_directivo AND cod_inst=:cod_inst AND cod_cargo=:cod_cargo");
+        fecha_final=:fecha_final, cod_cargo=:cod_cargo, cod_nombram=:cod_nombram WHERE cod_munic=:cod_munic AND 
+        cod_directivo=:cod_directivo AND cod_inst=:cod_inst AND cod_cargo=:id_cargo");
         $statement->bindParam(":fecha_inicio", $fecha_inicio);
         $statement->bindParam(":fecha_final", $fecha_final);
         $statement->bindParam(":cod_directivo", $cod_directivo);
         $statement->bindParam(":cod_inst", $cod_inst);
         $statement->bindParam(":cod_munic", $cod_munic);
         $statement->bindParam(":cod_cargo", $cod_cargo);
+        $statement->bindParam(":id_cargo", $id_cargo);
+        $statement->bindParam(":cod_nombram", $cod_nombram);
         return ($statement->execute()) ? true : false; 
     }
 

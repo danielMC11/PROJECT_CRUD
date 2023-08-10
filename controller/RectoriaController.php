@@ -24,10 +24,10 @@ class RectoriaController {
 
     public function show($cod_munic, $cod_inst, $cod_directivo, $cod_cargo) {
         $result = $this->model->show($cod_munic, $cod_inst, $cod_directivo, $cod_cargo);
-        if ($result !== false) {
+        if ($result) {
             return $result;
         } else {
-            return ;
+            return header("Location: index.php");
         }
     }
 
@@ -35,8 +35,8 @@ class RectoriaController {
         return ($this->model->index()) ? $this->model->index() : false;
     }
 
-    public function update($fecha_inicio, $fecha_final, $cod_directivo, $cod_inst, $cod_munic, $cod_cargo) {
-        $result = $this->model->update($fecha_inicio, $fecha_final, $cod_directivo, $cod_inst, $cod_munic, $cod_cargo);
+    public function update($fecha_inicio, $fecha_final, $cod_cargo, $cod_nombram, $cod_directivo, $cod_inst, $cod_munic, $id_cargo) {
+        $result = $this->model->update($fecha_inicio, $fecha_final, $cod_directivo, $cod_inst, $cod_munic,$id_cargo, $cod_cargo, $cod_nombram);
         if ($result != false) {
             return header("Location: show.php?cod_munic=".$cod_munic . "&cod_inst=" 
             .$cod_inst . "&cod_directivo=" .$cod_directivo . "&cod_cargo=" . $cod_cargo);

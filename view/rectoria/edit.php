@@ -19,7 +19,7 @@ if (isset($_GET['cod_munic']) && isset($_GET['cod_inst']) && isset($_GET['cod_di
 <!--Se llama a la funcion validarFechas()-->
 <div class="modal">
     <div class="modal-container">
-        <form id="update-form" action="update.php?cod_munic=<?= $data['cod_munic'] ?>&cod_cargo=<?= $data['cod_cargo']?>
+        <form id="update-form" action="update.php?cod_munic=<?= $data['cod_munic'] ?>&id_cargo=<?= $data['cod_cargo'] ?>
 &cod_inst=<?= $data['cod_inst'] ?>&cod_directivo=<?= $data['cod_directivo']?>" method="POST"
             onsubmit="return validarFechas()">
             <h2>MODIFICANDO REGISTRO</h2>
