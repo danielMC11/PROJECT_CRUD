@@ -164,6 +164,15 @@ class RectoriaModel {
     return ($statement->execute()) ? $statement->fetchAll() : false;
     }
 
+    public function cargos() {
+    $statement = $this->PDO->prepare("SELECT cod_cargo, nomb_cargo from cargos");
+    return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
+
+    public function acto_nombramiento() {
+        $statement = $this->PDO->prepare("SELECT cod_nombram, nomb_nombram from acto_nombramiento");
+        return ($statement->execute()) ? $statement->fetchAll() : false;
+    }
 
 
     public function logs_rectoria() {

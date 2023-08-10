@@ -5,7 +5,8 @@ require_once "/proyecto_crud/controller/RectoriaController.php";
 
 if (isset($_GET['cod_munic']) && isset($_GET['cod_inst']) && isset($_GET['cod_directivo']) && isset($_GET['cod_cargo'])) {
     $obj = new RectoriaController();
-    
+    $rows_car = $obj->cargos();
+    $rows_nom = $obj->acto_nombramiento();
     $rectoria = $obj->show($_GET['cod_munic'], $_GET['cod_inst'], $_GET['cod_directivo'], $_GET['cod_cargo']);
 } else {
     echo "HUBO UN ERROR :(";
@@ -13,6 +14,8 @@ if (isset($_GET['cod_munic']) && isset($_GET['cod_inst']) && isset($_GET['cod_di
 }
 ?>
 <link rel="stylesheet" type="text/css" href="/assest/css/modificar.css">
+<link rel="stylesheet" type="text/css" href="/assest/css/modificarInst.css">
+
 <!--Se llama a la funcion validarFechas()-->
 <div class="modal">
     <div class="modal-container">
@@ -35,10 +38,17 @@ if (isset($_GET['cod_munic']) && isset($_GET['cod_inst']) && isset($_GET['cod_di
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">CARGO</label>
-                <div class="col-sm-10">
-                    <input type="text" name="nomb_cargo" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['nomb_cargo']?>">
+                <label for="staticEmail" class="col-sm-2 col-form-label">CARGOS</label>
+                <div class="custom_select">
+                    <select name="cod_cargo" required class="form-control">
+                    <option value='<?= $rectoria['cod_cargo'] ?>'><?= $rectoria['nomb_cargo'] ?></option>
+                    <?php 
+                    foreach ($rows_car as $row_c) {
+                    if ($row_c['nomb_cargo'] !== $rectoria['nomb_cargo']) {    
+                    echo '<option value="' . $row_c['cod_cargo'] . '">' . $row_c['nomb_cargo'] . '</option>';                                }
+                    }
+                    ?> 
+                    </select>
                 </div>
             </div>
             <div class="mb-3 row">
@@ -64,10 +74,17 @@ if (isset($_GET['cod_munic']) && isset($_GET['cod_inst']) && isset($_GET['cod_di
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">NOMBRAMIENTO</label>
-                <div class="col-sm-10">
-                    <input type="text" name="nomb_nombram" readonly class="form-control-plaintext"
-                        value="<?= $rectoria['nomb_nombram']?>">
+                <label for="staticEmail" class="col-sm-2 col-form-label">ACTO NOMBRAMIENTO</label>
+                <div class="custom_select">
+                    <select name="cod_nombram" required class="form-control">
+                    <option value='<?= $rectoria['cod_nombram'] ?>'><?= $rectoria['nomb_nombram'] ?></option>
+                    <?php 
+                    foreach ($rows_nom as $row_n) {
+                    if ($row_n['nomb_nombram'] !== $rectoria['nomb_nombram']) {    
+                    echo '<option value="' . $row_n['cod_nombram'] . '">' . $row_n['nomb_nombram'] . '</option>';                                }
+                    }
+                    ?> 
+                    </select>
                 </div>
             </div>
             <div>

@@ -53,6 +53,14 @@ class RectoriaController {
         return ($this->model->instituciones()) ? $this->model->instituciones(): false;
     }
 
+    public function cargos(){
+        return ($this->model->cargos()) ? $this->model->cargos(): false;
+    }
+
+    public function acto_nombramiento(){
+        return ($this->model->acto_nombramiento()) ? $this->model->acto_nombramiento(): false;
+    }
+
     public function inst_munic(){
         return ($this->model->inst_munic()) ? $this->model->inst_munic(): false;
     }
