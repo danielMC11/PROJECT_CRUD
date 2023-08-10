@@ -11,11 +11,8 @@ $rows = $obj->logs_rectoria();
     <thead>
         <tr>
             <th scope="col">NOMBRE DIRECTIVO</th>
-            <th scope="col">NOMBRE INSTITUCION</th>
+            <th scope="col">CODIGO INSTITUCION</th>
             <th scope="col">CARGO</th>
-            <th scope="col">MUNICIPIO</th>
-            <th scope="col">FECHA INICIO</th>
-            <th scope="col">FECHA FINAL</th>
             <th scope="col">OPERACION</th>
             <th scope="col">MARCA DE TIEMPO</th>
             <th scope="col">USUARIO</th>
@@ -25,14 +22,11 @@ $rows = $obj->logs_rectoria();
         <?php if ($rows): ?>
             <?php foreach ($rows as $row): ?>
                 <tr>
-                    <th><?= $row['nomb_directivo_completo'] ?></th>
-                    <th><?= $row['nomb_inst'] ?></th>
+                    <th><?= $row['nomb_directivo'] ?></th>
+                    <th><?= $row['cod_inst'] ?></th>
                     <th><?= $row['nomb_cargo'] ?></th>
-                    <th><?= $row['nomb_munic'] ?></th>
-                    <th><?= $row['fecha_inicio'] ?></th>
-                    <th><?= $row['fecha_final'] ?></th>
                     <th><?= $row['operacion'] ?></th>
-                    <th><?= $row['changed_on'] ?></th>
+                    <th><?= $row['marca_de_tiempo'] ?></th>
                     <th><?= $row['user_id'] ?></th>
                 </tr>
             <?php endforeach; ?>

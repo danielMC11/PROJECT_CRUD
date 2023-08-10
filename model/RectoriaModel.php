@@ -179,7 +179,7 @@ class RectoriaModel {
 
 
     public function logs_rectoria() {
-        $statement = $this->PDO->prepare("SELECT * from rectoria_auditoria_mod");
+        $statement = $this->PDO->prepare("SELECT * from logs_rectoria");
         return ($statement->execute()) ? $statement->fetchAll() : false;
     }
 
