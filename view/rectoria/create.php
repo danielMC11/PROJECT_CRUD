@@ -11,6 +11,13 @@ $rows_inst_munic = $obj->inst_munic();
 ?>
 <link rel="stylesheet" type="text/css" href="/assest/css/agregarDir.css">
 
+
+<style>
+        input[type="text"] {
+            text-transform: uppercase;
+        }
+</style>
+
 <div class="modal">
     <div class="modal-container">
         <h2>Agregar un nuevo Directivo</h2>
@@ -46,13 +53,11 @@ $rows_inst_munic = $obj->inst_munic();
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">NOMBRE DIRECTIVO</label>
-            <input type="text" name="nomb_directivo" required class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
+            <input type="text" name="nomb_directivo" required class="form-control" oninput="convertToUppercase(this)">
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">APELLIDO DIRECTIVO</label>
-            <input type="text" name="apell_directivo" required class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
+            <input type="text" name="apell_directivo" required class="form-control" oninput="convertToUppercase(this)">
         </div>
        
         <div class="mb-3">
@@ -101,8 +106,6 @@ $rows_inst_munic = $obj->inst_munic();
 
         const sedes = codInst_Munic_Select.querySelectorAll('option');
 
-
-
         function actualizar() {
 
             const selectedInst = codInstSelect.value;
@@ -120,4 +123,10 @@ $rows_inst_munic = $obj->inst_munic();
 
         }
         codInstSelect.addEventListener('change', actualizar);
+</script>
+
+<script>
+function convertToUppercase(input) {
+            input.value = input.value.toUpperCase();
+        }
 </script>

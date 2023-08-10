@@ -52,15 +52,6 @@ $rowsToShow = array_slice($rows, $start, $rowsPerPage);
                 <th><?= $row['fecha_final'] ?></th>
 
                 <th>
-
-                    <?php
-                
-                    $cod_munic = $row['cod_munic'];
-                    $cod_inst = $row['cod_inst'];
-                    $cod_directivo = $row['di1'];
-                    $cod_cargo = $row['cod_cargo'];
-                    $data_url = sprintf("show.php?cod_munic=%s&cod_inst=%s&cod_directivo=%s&cod_cargo=%s", $cod_munic, $cod_inst, $cod_directivo, $cod_cargo);
-?>
                     <a
                         href="show.php?cod_munic=<?= $row['cod_munic'] ?>&cod_inst=<?= $row['cod_inst'] ?>&cod_directivo=<?= $row['cod_directivo'] ?>&cod_cargo=<?= $row['cod_cargo'] ?>"><i
                             class="fa fa-eye"></i></a>

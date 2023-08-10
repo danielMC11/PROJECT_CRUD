@@ -7,12 +7,18 @@ class RectoriaController {
         $this->model = new RectoriaModel();
     }
 
-    public function insertar($cod_directivo,$nomb_directivo,$apell_directivo,$cod_inst, $cod_munic,
+    public function insertar($cod_inst_cod_munic, $nomb_directivo, $apell_directivo,
     $cod_cargo,$fecha_inicio,$fecha_final){
-        $result = $this->model->insertar($cod_directivo,$nomb_directivo,$apell_directivo,$cod_inst, $cod_munic,
+        $cod_directivo = $this->model->insertar($nomb_directivo,$apell_directivo);
+    if ($cod_directivo){
+        $array = explode(" ", $cod_inst_cod_munic);
+        $cod_inst = $array[0];
+        $cod_munic = $array[1];
+        $result = $this->model->insertar_rec($cod_directivo,$cod_inst, $cod_munic, 
         $cod_cargo,$fecha_inicio,$fecha_final);
-    if ($result != false) {
+        if($result){
         return header("Location: index.php");
+        }
     }
     }
 

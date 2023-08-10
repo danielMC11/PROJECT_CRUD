@@ -10,28 +10,41 @@ class RectoriaModel {
         $this->PDO = $db->conexion();
     }
 
-    public function insertar($cod_inst_cod_munic, $nomb_directivo, 
-    $apell_directivo, $cod_cargo,$fecha_inicio,$fecha_final){
+    public function insertar($nomb_directivo, 
+    $apell_directivo){
             $statement1 = $this->PDO->prepare(
                 "INSERT INTO directivos (nomb_directivo,apell_directivo) 
                 VALUES (:nomb_directivo, :apell_directivo);");
                 $statement1->bindParam(":nomb_directivo", $nomb_directivo);
                 $statement1->bindParam(":apell_directivo", $apell_directivo);
-            $statement2 = $this->PDO->prepare(
-                "INSERT INTO rectoria (cod_directivo, cod_inst,cod_munic, cod_cargo,fecha_inicio,fecha_final) 
-                VALUES (:cod_directivo, :cod_inst, :cod_munic, :cod_cargo,:fecha_inicio,:fecha_final)");
-                $statement2->bindParam(":cod_directivo", $cod_directivo);
-                $statement2->bindParam(":cod_inst", $cod_inst);
-                $statement2->bindParam(":cod_munic", $cod_munic);
-                $statement2->bindParam(":cod_cargo", $cod_cargo);
-                $statement2->bindParam(":fecha_inicio", $fecha_inicio);
-                $statement2->bindParam(":fecha_final", $fecha_final);
     
-                $result1 = $statement1->execute();
-                $result2 = $statement2->execute();
-    
-                return ($result1 && $result2);
+            if($statement1->execute()){
+                $statement2 = $this->PDO->prepare("SELECT CONCAT('di',CAST(nextval('seq_ids_dir') -1 as VARCHAR(5)))as current");
+                if($statement2->execute()){
+                    $statement3 = $this->PDO->prepare("SELECT setval('seq_ids_dir',(select currval('seq_ids_dir') -1))");
+                    if($statement3->execute()){
+                        $cod_directivo=$statement2->fetch();
+                        return $cod_directivo['current'];
+                    }
+                }
+            }
        }
+
+    public function insertar_rec($cod_directivo,$cod_inst, $cod_munic, 
+        $cod_cargo,$fecha_inicio,$fecha_final){
+        $statement = $this->PDO->prepare(
+        "INSERT INTO rectoria (cod_directivo, cod_inst,cod_munic, cod_cargo,fecha_inicio,fecha_final) 
+        VALUES (:cod_directivo, :cod_inst, :cod_munic, :cod_cargo,:fecha_inicio,:fecha_final)");
+        $statement->bindParam(":cod_directivo", $cod_directivo);
+        $statement->bindParam(":cod_inst", $cod_inst);
+        $statement->bindParam(":cod_munic", $cod_munic);
+        $statement->bindParam(":cod_cargo", $cod_cargo);
+        $statement->bindParam(":fecha_inicio", $fecha_inicio);
+        $statement->bindParam(":fecha_final", $fecha_final);
+
+        return($statement->execute());
+
+    }
 
     public function show($cod_munic, $cod_inst, $cod_directivo, $cod_cargo) {
         $statement = $this->PDO->prepare(
@@ -48,11 +61,11 @@ class RectoriaModel {
             r.cod_directivo,
             r.cod_cargo 
         FROM rectoria r
-        JOIN directivos d ON d.cod_directivo = r.cod_directivo
-        JOIN instituciones i ON i.codigo_ies_padre = (SELECT codigo_ies_padre FROM inst_por_municipio WHERE cod_inst = r.cod_inst)
-        JOIN cargos c ON c.cod_cargo = r.cod_cargo
-        JOIN acto_nombramiento a ON a.cod_nombram = r.cod_nombram
-        JOIN municipio m ON m.cod_munic = r.cod_munic
+        LEFT JOIN directivos d ON d.cod_directivo = r.cod_directivo
+        LEFT JOIN instituciones i ON i.codigo_ies_padre = (SELECT codigo_ies_padre FROM inst_por_municipio WHERE cod_inst = r.cod_inst)
+        LEFT JOIN cargos c ON c.cod_cargo = r.cod_cargo
+        LEFT JOIN acto_nombramiento a ON a.cod_nombram = r.cod_nombram
+        LEFT JOIN municipio m ON m.cod_munic = r.cod_munic
         WHERE r.cod_munic = :cod_munic
             AND r.cod_inst = :cod_inst
             AND r.cod_directivo = :cod_directivo
@@ -81,11 +94,11 @@ class RectoriaModel {
             r.cod_directivo,
             r.cod_cargo 
         FROM rectoria r
-        JOIN directivos d ON d.cod_directivo = r.cod_directivo
-        JOIN instituciones i ON i.codigo_ies_padre = (SELECT codigo_ies_padre FROM inst_por_municipio WHERE cod_inst = r.cod_inst)
-        JOIN cargos c ON c.cod_cargo = r.cod_cargo
-        JOIN acto_nombramiento a ON a.cod_nombram = r.cod_nombram
-        JOIN municipio m ON m.cod_munic = r.cod_munic
+        LEFT JOIN directivos d ON d.cod_directivo = r.cod_directivo
+        LEFT JOIN instituciones i ON i.codigo_ies_padre = (SELECT codigo_ies_padre FROM inst_por_municipio WHERE cod_inst = r.cod_inst)
+        LEFT JOIN cargos c ON c.cod_cargo = r.cod_cargo
+        LEFT JOIN acto_nombramiento a ON a.cod_nombram = r.cod_nombram
+        LEFT JOIN municipio m ON m.cod_munic = r.cod_munic
         ORDER BY CAST(r.cod_inst as INTEGER)
         ");
         return ($statement->execute()) ? $statement->fetchAll() : false;

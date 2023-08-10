@@ -5,6 +5,7 @@ require_once "/proyecto_crud/controller/RectoriaController.php";
 
 if (isset($_GET['cod_munic']) && isset($_GET['cod_inst']) && isset($_GET['cod_directivo']) && isset($_GET['cod_cargo'])) {
     $obj = new RectoriaController();
+    
     $rectoria = $obj->show($_GET['cod_munic'], $_GET['cod_inst'], $_GET['cod_directivo'], $_GET['cod_cargo']);
 } else {
     echo "HUBO UN ERROR :(";
